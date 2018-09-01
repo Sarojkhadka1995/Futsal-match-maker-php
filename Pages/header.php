@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../connections/db.php';
-$query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
+// $query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
 $loggeduser_name=$_SESSION['loggedUser_name'];
 $loggeduser_id=$_SESSION['loggedUser'];
 ?>
@@ -47,22 +47,33 @@ $loggeduser_id=$_SESSION['loggedUser'];
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#createTeam">Create team</a>
+              <a class="nav-link" href="../controller/team_check.php" >Create team</a>
             </li>
             <li class="nav-item">
               <div class="dropdown">
                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</a>
                  <!--Dropdown link of view -->
                 <div class="dropdown-menu color4" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="myteam.php">My Team</a>
+                  <a class="dropdown-item" href="../controller/myteam_check.php">My Team</a>
                   <a class="dropdown-item" href="allteam.php">All Team</a>
                   <a class="dropdown-item" href="futsal.html">Futsal<a>
                 </div>
               </div>   
             </li>
             <li class="nav-item">
+              <div class="dropdown">
+                <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                 <!--Dropdown link of view -->
+                <div class="dropdown-menu color4" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="../pages/player_update.php">Update profile</a>
+                  <a class="dropdown-item" href="../actions/leave_team.php">Leave team</a>
+                  <a class="dropdown-item" href="../controller/delete_team.php">Delete team</a>
+                </div>
+              </div>   
+            </li><!-- 
+            <li class="nav-item">
               <a class="nav-link" href="player_update.php">Update</a>
-            </li>
+            </li> -->
             <li>
               <a href="../pages/notification.php" class="nav-link notify">Notification<span class="badge count" style="color:red;border-radius:10px;"></span></a>
             </li>
@@ -75,7 +86,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
     </nav>
 
      <!-- Modal -->
-<div class="modal fade" id="createTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="createTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header body">
@@ -85,78 +96,11 @@ $loggeduser_id=$_SESSION['loggedUser'];
         </button>
       </div>
       <div class="modal-body">
-        <form type="form-inline" role="form" action="../actions/create_team.php" method="Post">
-          <div class="form-group">
-            <label class="control-label" for="name">Team name</label>
-            <div class="form-group">
-              <input type="text" class="form-control" name="teamname" placeholder="Team name" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label" for="venue">Preferred venue</label>
-            <div class="form-group">
-              <input class="form-control" type="text" name="venue" id="venue" placeholder="Preferred venue" required>
-            </div>
-          </div>  
-          <div class="form-group">
-            <label class="control-label" for="time">Time</label>
-            <div class="form-group">
-              <input class="form-group" type="time" name="time" id="time" placeholder="HR:MM" >
-            </div>
-          </div>  
-          <div class="form-group">
-            <label class="control-label" for="contact">Contact</label>
-            <div class="form-group">
-              <input class="form-control" type="number" name="contact" id="contact" placeholder="+977-XXXXXXXXXX">
-              <span id= "err5" style="color:red;"></span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label">Members</label>
-            <div class="form-row">
-              <div class="col">
-                <select class="form-control" name="member1">
-                    <?php
-                    while($row = mysqli_fetch_assoc($query)) { ?>
-                        <option value="<?php echo $row['uid']; ?>"><?php echo $row['name']; ?></option>
-                    <?php } ?>
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="member2">
-                    <?php
-                    $query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-                    while($row = mysqli_fetch_assoc($query)) { ?>
-                        <option value="<?php echo $row['uid']; ?>"><?php echo $row['name']; ?></option>
-                    <?php } ?>
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="member3">
-                    <?php
-                    $query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-                    while($row = mysqli_fetch_assoc($query)) { ?>
-                        <option value="<?php echo $row['uid']; ?>"><?php echo $row['name']; ?></option>
-                    <?php } ?>
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="member4">
-                    <?php
-                    $query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-                    while($row = mysqli_fetch_assoc($query)) { ?>
-                        <option value="<?php echo $row['uid']; ?>"><?php echo $row['name']; ?></option>
-                    <?php } ?>
-                </select>
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary" class="btn btn-default">Create</button>
-        </form>
+        
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Bootstrap core JavaScript -->
 
@@ -181,8 +125,8 @@ $(document).ready(function(){
         }
       },error: function(){
         $.alert({
-               title: 'Invalid Number',
-               content: 'Invalid Phone number!',
+               title: 'Error',
+               content: 'Ajax call failed',
         })
       }
     });

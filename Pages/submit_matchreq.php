@@ -1,7 +1,7 @@
 <?php
 include "../connections/db.php";
 
-$tid1=$_GET['id1'];
+$tid2=$_GET['id1'];
 
 $query=mysqli_query($con,"SELECT * from futsal");
 
@@ -48,7 +48,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 <form role="form" action="../actions/matchrequest.php" method="Post">
 	<div class="form-group">
 		<label class="control-label" for="fname">Venue</label>
-		<input type="hidden" name="tid1" value="<?php echo $tid1; ?>">
+		<input type="hidden" name="tid2" value="<?php echo $tid2; ?>">
       	<div class="form-group">
       		<select class="form-control" name="fname">
             	<?php while($row = mysqli_fetch_assoc($query)) { ?>

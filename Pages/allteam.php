@@ -58,9 +58,9 @@ $query=mysqli_query($con,"SELECT * from teams where tid !='$tid' ");
 				      	<tr>
 				          <td><?php echo $row['team_name'] ;?></td>
 				          <td><?php echo $row['venue'] ;?></td>
-				          <td><?php echo $row['preferred_time'] ;?></td>
+				          <td><?php echo $row['start_time']." - ".$row['end_time'] ;?></td>
 				          <td><?php echo $row['contact'] ;?></td>
-				          <td><a href="../pages/viewteam.php?id=<?php echo $row['tid']; ?>">View</a> | <a href="submit_matchreq.php?id1=<?php echo $row['tid']; ?>">Play</a></td>
+				          <td><a href="../pages/viewteam.php?id=<?php echo $row['tid']; ?>">View</a> | <a href="../Controller/myteam_check.php?id1=<?php echo $row['tid']; ?>">Play</a></td>
 				        </tr>
 				        <?php } ?>
 				      </tbody>

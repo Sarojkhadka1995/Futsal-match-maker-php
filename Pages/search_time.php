@@ -4,7 +4,7 @@ session_start();
 if(isset($_POST["submit"])){
 	$start_time=$_POST["start_time"];
 	$end_time=$_POST["end_time"];
-	$query=mysqli_query($con,"SELECT * from teams where preferred_time BETWEEN '$start_time' AND '$end_time' ");	
+	$query=mysqli_query($con,"SELECT * from teams where start_time and end_time BETWEEN '$start_time' AND '$end_time'");	
 }
 ?>
 <!DOCTYPE html>
@@ -54,7 +54,7 @@ $(function(){
 	      	<tr>
 	          <td><?php echo $row['team_name'] ;?></td>
 	          <td><?php echo $row['venue'] ;?></td>
-	          <td><?php echo $row['preferred_time'] ;?></td>
+	          <td><?php echo $row['start_time']. "-" .$row['end_time'] ;?></td>
 	          <td><?php echo $row['contact'] ;?></td>
 	          <td><a href="../pages/viewteam.php?id=<?php echo $row['tid']; ?>">View</a> | <a href="submit_matchreq.php?id1=<?php echo $row['tid']; ?>">Play</a></td>
 			</tr>

@@ -33,7 +33,7 @@ if (isset($_POST['login'])){
     }else{
         header('Refresh:5,URL=../index.php');
         echo "User doesnot exist"."<br>";
-        echo "Redirecting back ot login page in 5 sec...";    
+        echo "Redirecting back to login page in 5 sec...";    
     }
 }
 

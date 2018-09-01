@@ -21,20 +21,25 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
+
 	<script src="../vendor/jquery/jquery.min.js"></script>
-	 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-	<!-- Bootstrap core CSS -->
-	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+  <script src="../bootstrap/js/bootstrap.min.js"></script>
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+     
+ 
+    <!-- Custom styles  -->
+    <link href="../css/blog-home.css" rel="stylesheet">
 
-	<!-- Custom styles for this template -->
-	 <link href="../css/blog-home.css" rel="stylesheet">
-
-	
-	  
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- JQuery confirm dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 	<script>
 	  	$(function(){
 	  		$("#header").load("../pages/header.php");
@@ -48,7 +53,7 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 	<div class="container">
 		<div class="row">
 			<!--Entries Column -->
-  			<div class="col-md-8">
+  			<div class="col-md-9">
   				<div style="text-align: center">
   					<h4>Game Request</h4>
   				</div>
@@ -56,8 +61,8 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 					<table class="table table-hover">
 				      <thead>
 				        <tr>
-				          <th scope="col">Team Name</th>
-				          <th scope="col">Venue</th>
+				          <th scope="col">Opponent Name</th>
+				          <th scope="col">Futsal</th>
 				          <th scole="col">Location</th>
 				          <th scope="col">Start time</th>
 				          <th scope="col">End time</th>
@@ -75,7 +80,7 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 				          <td><?php echo $row['location']; ?></td>
 				          <td><?php echo $row['start_time'] ;?></td>
 				          <td><?php echo $row['end_time'] ;?></td>
-				          <td><a href="../actions/cancel_matchreq.php?id=<?php echo $row['tid']; ?>">Cancel</a> | <a href="../actions/accept_matchreq.php?id1=<?php echo $row['tid']; ?>">Accept</a></td>
+				          <td><a href="../actions/cancel_matchreq.php?id=<?php echo $row['gid']; ?>">Cancel</a> | <a href="../actions/accept_matchreq.php?id1=<?php echo $row['gid']; ?>">Accept</a></td>
 				        </tr>
 				        <?php } ?>
 				      </tbody>
@@ -88,7 +93,11 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 				    <table class="table table-hover">
 				    	<thead>
 				        <tr>
-				          <th scope="col">Team Name</th>
+				          <th scope="col">Opponent Name</th>
+				          <th scope="col">Futsal</th>
+				          <th scope="col">Location</th>
+				          <th scope="col">Start time</th>
+				          <th scope="col">End time</th>
 				          <th scope="col">Action</th>
 				        </tr>
 				      	</thead>
@@ -99,48 +108,81 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 				          		$query4=mysqli_query($con,"SELECT team_name from teams where tid='$opp_tid'");
 				          		$result4=mysqli_fetch_assoc($query4);
 				          		echo $result4['team_name']; ?></td>
-				          	<td><input type="button" class="btn btn-primary view" value="View" id="<?php echo $row['mid']; ?>"><span style="color:blue;" id="Pending"></span></td>		
+				          		<td><?php echo $row2['venue'] ;?></td>
+						        <td><?php echo $row2['location']; ?></td>
+						        <td><?php echo $row2['start_time'] ;?></td>
+						        <td><?php echo $row2['end_time'] ;?></td>
+				          		<td><input type="button" class="btn btn-primary view" value="View" id="<?php echo $row2['gid']; ?>">|<button type="button" class="btn btn-success" id="showBtn">Book</button>|<a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Delete</button></a></td>	
 				          	</tr>
 				          	<?php } ?>	    		
 				    	</tbody>
 				    </table>
 				</div>
 			</div>
-			<div id="sidebar" class="col-md-4"></div>
+			<div id="sidebar" class="col-md-3"></div>
 		</div>
 	</div>
 
-<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script>
 $(document).ready(function(){
-	$('.view').click(function(){  
-    	var mid = $(this).attr("id");
-	    alert("Inside response_notification");
+// 	//hiding book button
+// 	book_button();  
+// 	function book_button(){
+// 		$('#showBtn').hide();
+// 		// var value=val;
+// 		// if(value!=1){
+// 		// 	$('#showBtn').hide();
+// 		// }else{
+// 		// 	$('#showBtn').fadeIn('slow');
+// 		// }
+// 	}
+
+	//checking confirmation condition of game request i.e notifying request sender about his game response
+    $('.view').click(function(){ 
+    	var gid = $(this).attr("id");
+	    // alert(gid);
+	    // alert("Inside response_notification");
 	    $.ajax({
-			url:"../actions/fetch_responsenotification.php",
+			url:"../actions/fetch_response_notification.php",
 			method:"post",
 			data:{
-			mid:mid},
+			gid:gid},
 			dataType:"json",
 			success:function(json){
-				if(json.confirm = 0 || json.confirm = 2){
-					$('#Pending').html(json.notification);
-					$('#book').hide();
+				console.log(json.value);
+				if(json.value == 0){
+					$.alert({
+			       	title: 'Response',
+			       	content: 'Pending',
+					})
+					//$('.Pending').html("Pending");
+					//document.getElementById('Pending').innerHTML="Pending";
+					//$('#book').hide();
+				}else if(json.value == 2){
+					$.alert({
+			       	title: 'Response',
+			       	content: 'Rejected',
+					})
+					//document.getElementById('Pending').innerHTML="Rejected";
+					//$('#Pending').html(json.notification);
+					//$('#book').fadeIn('slow');
 				}else{
-					$('#Pending').html(json.notification);
-					$('#book').fadeIn('slow');
+					$.alert({
+			       	title: 'Response',
+			       	content: 'Accepted',
+					})
+					//document.getElementById('Pending').innerHTML="Accepted";
+					//$('#showBtn').fadeIn('slow');
 				}
 			},error: function(){
 				$.alert({
-			       title: 'Invalid Number',
-			       content: 'Invalid Phone number!',
+			       title: 'APi call error',
+			       content: 'Unsuccessful!',
 				})
 			}
 		});
-	}); 
+	});
 });
 </script>
 </body>

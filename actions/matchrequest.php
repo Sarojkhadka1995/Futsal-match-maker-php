@@ -4,9 +4,10 @@ session_start();
 $id=$_SESSION['loggedUser'];
 $query1=mysqli_query($con,"SELECT tid from users where uid='$id' ");
 $result=mysqli_fetch_assoc($query1);
-$tid2=$result['tid'];
+$tid1=$result['tid'];
 if(isset($_POST["matchcreator"])){
-	$tid1=$_POST['tid1'];
+	//opponent team id retrived from submit match from which is set in url when users click play match after search
+	$tid2=$_POST['tid2'];
 	echo ($tid1."<br>".$tid2);
 	$venue=$_POST['fname'];
 	$location=$_POST['location'];

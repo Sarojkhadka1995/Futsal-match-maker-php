@@ -3,7 +3,7 @@ include "../connections/db.php";
 session_start();
 if(isset($_POST["submit"])){
 	$team=$_POST["team"];
-	$query=mysqli_query($con,"SELECT * from teams where team_name = '$team' ");	
+	$query=mysqli_query($con,"SELECT * from teams where team_name = '$team' ");
 }
 ?>
 <!DOCTYPE html>
@@ -14,6 +14,8 @@ if(isset($_POST["submit"])){
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+
+
 
 <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,10 +67,10 @@ $(function(){
 <div id="sidebar" class="col-md-4"></div>
 </div>
 </div>
-
 <!-- Bootstrap core JavaScript -->
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>

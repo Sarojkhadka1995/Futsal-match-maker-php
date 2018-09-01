@@ -44,7 +44,7 @@ $(function(){
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Team Name: <?php echo " ".$row['team_name'] ;?></li>
       <li class="list-group-item">Preferred Venue: <?php echo " ".$row['venue'] ;?></li>
-      <li class="list-group-item">Preferred Time: <?php echo " ".$row['preferred_time'] ;?></li>
+      <li class="list-group-item">Preferred Time: <?php echo " ".$row['start_time']." - ".$row['end_time'] ;?></li>
       <li class="list-group-item">Contact: <?php echo " ".$row['contact'] ;?></li>
     </ul>
     <div class="container">

@@ -53,7 +53,7 @@ $row = mysqli_fetch_assoc($query);
 		<div class="form-group">
 			<label class="control-label" for="name">Name</label>
 			<div class="form-row">
-				<input type="text" name="fname" class="form-control" placeholder="<?php echo $row["name"]; ?>" required onchange="validate_name(this.value)">
+				<input type="text" name="fname" class="form-control" value="<?php echo $row["name"]; ?>" required onchange="validate_name(this.value)">
  			 	<span id= "err" style="color:red;"></span>
 			</div>
 		</div>
@@ -62,9 +62,9 @@ $row = mysqli_fetch_assoc($query);
 		<div class="form-group">
 			<label for="email" class="control-label">Email</label>
 			<div class="form-group">
-				<input type="email" name="email" id="email" class="form-control" placeholder="<?php echo $row["email"]; ?>" required email >
+				<input type="email" name="email" id="email" class="form-control" value="<?php echo $row["email"]; ?>" onchange="check_email(this.value)" required email >
 				<span id='err3' style="color:red;"></span>
-				<!-- <span id='err1' style="color:red;"></span> -->
+				<span id='err1' style="color:red;"></span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -78,7 +78,7 @@ $row = mysqli_fetch_assoc($query);
 		<div class="form-group">
 			<label class="control-label" for="contact">Contact</label>
 			<div class="form-group">
-				<input class="form-control" type="number" name="contact" id="contact" placeholder="<?php echo $row["contact"]; ?>" required >
+				<input class="form-control" type="number" name="contact" id="contact" value="<?php echo $row["contact"]; ?>" required >
 				<span id= "err5" style="color:red;"></span>
 			</div>
 		</div>
@@ -109,11 +109,28 @@ $row = mysqli_fetch_assoc($query);
 			}
 		}
 		
-		//Validating email
-		function check_email(val){
-			event.preventDefault();
-			alert("inside check email");
-			 var email_address = document.forms["update_form"]["email"].value;
+		// validating duplicate email id entry handled by error.php
+		// function check_email(val){
+		// 	alert("inside check email");
+		// 	 var email_address = val;
+			
+		// 	$.ajax({
+		// 		url:"../actions/update.php",
+		// 		method:"post",
+		// 		data:{
+		// 			email:email_address,
+		// 			uid:<?php echo $_SESSION['loggedUser']; ?>
+		// 		},
+		// 	success:function(data){
+		// 		$('#err1').html(data);
+		// 		}
+		// 	})
+		// }
+
+		//Validating email using api call
+		function validate_email(val){
+			//alert("inside validate email");
+			var email_address= val;
 			
 			$.ajax({
 				url:"../actions/update.php",
@@ -126,70 +143,39 @@ $row = mysqli_fetch_assoc($query);
 				$('#err1').html(data);
 				}
 			})
-			event.currentTarget();
-		}
 
-		function validate_email(val){
-			//alert("inside validate email");
-			var email_address= val;
+			// set endpoint and your access key
+			var access_key = '4a51d0df3e83a362e1913ece36a02ace';
 			
-			// $.ajax({
-			// 	url:"../actions/update.php",
-			// 	method:"post",
-			// 	data:{
-			// 		email:email_address,
-			// 		uid:<?php echo $_SESSION['loggedUser']; ?>
-			// 	},
-			// success:function(data){
-			// 	$('#err1').html(data);
-			// 	}
-			// })
-
-			// // set endpoint and your access key
-			// var access_key = '4a51d0df3e83a362e1913ece36a02ace';
-			
-			// // verify email address via AJAX call
-			// $.ajax({
-			//     url: 'http://apilayer.net/api/check?access_key=' + access_key + '&email=' + email_address+'&smtp=1&format=1',   
-			//     dataType: 'jsonp',
-			//     success: function(json) {
-			//     	var valid = json.format_valid;
-			//     	var smtp = json.smtp_check;
-			//     	var mx = json.mx_found;
-			//     	if( valid!=1 || smtp!=1 || mx!=1){
-			//     		e=0;
-			// 			document.getElementById('err3').innerHTML="Invaid Email";
-			// 			$('#showBtn').hide();
-			// 		}else{
-			// 			document.getElementById('err3').innerHTML="";
-			// 	    	$('#showBtn').fadeIn('slow');
-			// 		}
+			// verify email address via AJAX call
+			$.ajax({
+			    url: 'http://apilayer.net/api/check?access_key=' + access_key + '&email=' + email_address+'&smtp=1&format=1',   
+			    dataType: 'jsonp',
+			    success: function(json) {
+			    	var valid = json.format_valid;
+			    	var smtp = json.smtp_check;
+			    	var mx = json.mx_found;
+			    	if( valid!=1 || smtp!=1 || mx!=1){
+			    		e=0;
+						document.getElementById('err3').innerHTML="Invaid Email";
+						$('#showBtn').hide();
+					}else{
+						document.getElementById('err3').innerHTML="";
+				    	$('#showBtn').fadeIn('slow');
+					}
 
  
-			//     // Access and use your preferred validation result objects
-			//     console.log(json.format_valid);
-			//     console.log(json.smtp_check);
-			//     console.log(json.mx_found);
-			//     console.log(json.score);
+			    // Access and use your preferred validation result objects
+			    console.log(json.format_valid);
+			    console.log(json.smtp_check);
+			    console.log(json.mx_found);
+			    console.log(json.score);
 			                
-			//     }
-			// });
+			    }
+			});
 		}
 
-		function check_email(){
-			var checker= document.getElementById("err1").innerHTML;
-			alert(checker);
-			if (checker!=""){
-				c=0;
-			}else{
-				c=1;
-			}
-			if (f==1 && c==1 && e==1 && p==1 && n==1) {
-			$('#showBtn').fadeIn('slow');
-			} else {
-				$('#showBtn').hide();
-			}
-		}
+
 		//Validating password with 8 as valid length	
 		
 		function validate_password(val){			
@@ -209,49 +195,49 @@ $row = mysqli_fetch_assoc($query);
     		
 	    //Checking validity of phone number using api
 	    		
-		// function validate_contact(val) {  
+		function validate_contact(val) {  
 		
-		// 	// set endpoint and your access key
-		// 	var access_key = '5b4c4477c1bfc92253c9ee5c980605e4';
-		// 	var phone_number = val;
+			// set endpoint and your access key
+			var access_key = '5b4c4477c1bfc92253c9ee5c980605e4';
+			var phone_number = val;
 			
 
-		// 	// verify phone number via AJAX call
-		// 	$.ajax({
-		// 	    url: 'http://apilayer.net/api/validate?access_key=' + access_key + '&number=' + phone_number + '&format=1&country_code=NP',   
-		// 	    dataType: 'jsonp',
-		// 	    success: function(json) {
+			// verify phone number via AJAX call
+			$.ajax({
+			    url: 'http://apilayer.net/api/validate?access_key=' + access_key + '&number=' + phone_number + '&format=1&country_code=NP',   
+			    dataType: 'jsonp',
+			    success: function(json) {
 
-		// 		    // Access and use your preferred validation result objects
-		// 		    var valid=json.valid;
-		// 		    var linetyp=json.line_type;
-		// 		    //alert(linetyp);
-		// 		    if (valid!=1 || linetyp=="special_services"){
-		// 		    	n=0;
-		// 		    	document.getElementById('err5').innerHTML="Invaid number";
-		// 				$('#showBtn').hide();
-		// 		  //   	$.alert({
-		//   		// 			title: 'Invalid Number',
-		//     // 				content: 'Invalid Phone number!',
-		// 				// });	
-		// 		    }
-		// 		    else{
-		// 		    	document.getElementById('err5').innerHTML="";
-		// 		    	$('#showBtn').fadeIn('slow');
-		// 		    }
-		// 		    console.log(json.country_code);
-		// 		    console.log(json.carrier);
-		// 		    console.log(json.local_format);
-		// 		    console.log(json.country_name);
-		// 		    console.log(json.international_format);
-		// 		    console.log(json.location);
-		// 		    console.log(json.line_type);
-	 //        	},
-	 //        	async: false // <- this turns it into synchronous
+				    // Access and use your preferred validation result objects
+				    var valid=json.valid;
+				    var linetyp=json.line_type;
+				    //alert(linetyp);
+				    if (valid!=1 || linetyp=="special_services"){
+				    	n=0;
+				    	document.getElementById('err5').innerHTML="Invaid number";
+						$('#showBtn').hide();
+				  //   	$.alert({
+		  		// 			title: 'Invalid Number',
+		    // 				content: 'Invalid Phone number!',
+						// });	
+				    }
+				    else{
+				    	document.getElementById('err5').innerHTML="";
+				    	$('#showBtn').fadeIn('slow');
+				    }
+				    console.log(json.country_code);
+				    console.log(json.carrier);
+				    console.log(json.local_format);
+				    console.log(json.country_name);
+				    console.log(json.international_format);
+				    console.log(json.location);
+				    console.log(json.line_type);
+	        	},
+	        	async: false // <- this turns it into synchronous
 
-	 //        });
+	        });
 	        
-	 //    }
+	    }
 
 	</script>
 </body>

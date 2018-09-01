@@ -11,7 +11,7 @@ if(isset($_POST['view'])){
 	// 	$update_query = "UPDATE game SET status=1 WHERE team2='$tid' and status=0";
 	// 	mysqli_query($con, $update_query);
 	// }
-	$query = mysqli_query ($con,"SELECT mid from game where team2=$tid and status=0 ");
+	$query = mysqli_query ($con,"SELECT gid from game where team2=$tid and status=0 ");
 	$count = mysqli_num_rows ($query);
 	// echo($count);
 	$data = array(

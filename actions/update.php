@@ -11,6 +11,8 @@ function test_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
+
+//handles the ajax call to check the duplcate email entry handled by error function.
 // if(isset($_POST["uid"])){
 // 	$uid=$_POST["uid"];
 // 	$email=test_input($_POST["email"]);
