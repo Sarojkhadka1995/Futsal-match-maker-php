@@ -39,6 +39,16 @@ $query=mysqli_query($con,"SELECT * from teams where tid !='$tid' ");
 		<div class="row">
 			<!--Entries Column -->
   			<div class="col-md-8">
+  				<!-- Showing error message if a user without a team tries to create match request -->
+  				<?php if(isset($_GET['err_matchreq'])){ ?>
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				  <strong>You are not associated with any team, you cannot create match
+				</strong>
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<?php }?>
   				<ul class="list-group list-group-flush">
       				<li class="list-group-item body">All Other Teams</li>
       			</ul>

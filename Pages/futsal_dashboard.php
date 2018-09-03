@@ -24,6 +24,78 @@
  
 </head>
 <body class="body"><!-- Calling header -->
-    <div id="fheader"></div>
+  <div id="fheader"></div>
+<!-- Alert showing you aleardy have a team -->
+  <?php if(isset($_GET['err'])){ ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>You have already created a futsal.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+<!-- Alert showing you dont have futsal -->
+  <?php if(isset($_GET['err_myfutsal'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>You dont have a futsal.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+<!-- Alert show delete error -->
+  <?php if(isset($_GET['del_err'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Delete futsal failed.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+<!--Alert showing delete success -->
+  <?php if(isset($_GET['del_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Futsal deleted successfully.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!--Alert showing futsal create success -->
+  <?php if(isset($_GET['create_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Futsal created successfully.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!--Alert showing futsal create error-->
+  <?php if(isset($_GET['create_err'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Futsal with this name and location already present.<br>Please enter your actual futsal detail.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!--Alert showing futsal update success -->
+  <?php if(isset($_GET['update_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Futsal updated successfully.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!--Alert showing futsal update error -->
+  <?php if(isset($_GET['update_err'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Futsal update failed.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
 </body>
 </html>

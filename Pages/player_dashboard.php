@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +13,9 @@
 
     <title>Futsal Management System</title>
 
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
+
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles template -->
@@ -30,14 +35,132 @@
    
 <!-- Calling header -->
 <div id="header"></div>
+
 <!-- Page Content -->
 <div class="container">
 
 <div class="row">
 
-<!-- Blog Entries Column -->
+<!-- Main body -->
 <div class="col-md-8">
-
+<!--   Showing team create alert preventing player from creating multiple team -->
+<?php if(isset($_GET['err'])){ ?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>You are already in a team.</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?>
+<!--   Showing view myteam and leave team error creating alert if player is not in any team -->
+<?php if(isset($_GET['err_myteam'])){ ?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>You are not in any team.</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?> 
+<!--   Showing delete team alert preventing unauthorized player to delete a team -->
+<?php if(isset($_GET['err_delteam'])){ ?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>You are not a team captain, you cannot delete a team
+</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?>
+<!-- Delete success -->
+<?php if(isset($_GET['delteam'])){ ?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Team successfully deleted.
+</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?>
+<!-- alert showing captain cannot leave the team -->
+<?php if(isset($_GET['err_leaveteam'])){ ?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>You are the captain of the team, you cannot leave the team.<br>If you want to leave the team you have to delete it.
+</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?>
+<!-- leave success -->
+<?php if(isset($_GET['leaveteam'])){ ?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Successfully left team.
+</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?> 
+<!-- match create success -->
+<?php if(isset($_GET['matchreq'])){ ?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Successfully created a match.
+</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?> 
+<!-- match create failed -->
+<?php if(isset($_GET['err_matchreq'])){?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Failed to create Match.
+    </strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<?php } ?>
+<!-- Error during create team same id as current user -->
+<?php if(isset($_GET['err_sameid'])){?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Create team failed, do no select yourself as a member.
+    </strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<?php } ?>
+<!-- Error during create team same members-->
+<?php if(isset($_GET['err_same'])){?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Create team failed, Select different members.
+    </strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<?php } ?>
+<!-- create team success -->
+<?php if(isset($_GET['create_team'])){ ?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Successfully created a team.
+</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?> 
+<!-- Error during create team -->
+<?php if(isset($_GET['err_create_team'])){?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Create team failed.
+    </strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<?php } ?>
   <h1 class="my-4">Latest
     <small>News</small>
   </h1>

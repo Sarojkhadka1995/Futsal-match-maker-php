@@ -17,9 +17,9 @@ if(isset($_POST["matchcreator"])){
 
 	$query=mysqli_query($con,"INSERT INTO game(team1,team2,confirm,venue,location,start_time,end_time,gdate,notify,status) VALUES('$tid1' , '$tid2' , 'No' , '$venue' , '$location' , '$s_time' , '$e_time' , '$date',1,0)");
 	if($query){
-		header('Location:../pages/player_dashboard.php');
+		header('Location:../pages/player_dashboard.php?matchreq=1');
 	}else{
-		echo "Insertion failed.";
+		header('Location:../pages/player_dashboard.php?err_matchreq=1');;
 	}
 }
 ?>

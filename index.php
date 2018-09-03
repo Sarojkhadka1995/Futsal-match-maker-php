@@ -18,7 +18,16 @@
 </head>
 
 <body class="body">
-
+<!-- User not found-->
+<?php if(isset($_GET['err_login'])){?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>User no found.
+    </strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<?php } ?>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navcolor">
     <div class="container">

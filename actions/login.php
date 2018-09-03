@@ -31,9 +31,7 @@ if (isset($_POST['login'])){
             header('Location: ../pages/admin_dashboard.php');
         }
     }else{
-        header('Refresh:5,URL=../index.php');
-        echo "User doesnot exist"."<br>";
-        echo "Redirecting back to login page in 5 sec...";    
+        header('Location:../index.php?err_login');    
     }
 }
 

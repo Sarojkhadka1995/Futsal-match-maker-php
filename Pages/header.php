@@ -68,6 +68,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
                   <a class="dropdown-item" href="../pages/player_update.php">Update profile</a>
                   <a class="dropdown-item" href="../actions/leave_team.php">Leave team</a>
                   <a class="dropdown-item" href="../controller/delete_team.php">Delete team</a>
+                  <a class="dropdown-item" href="../pages/bookfutsal.php">Book Futsal</a>
                 </div>
               </div>   
             </li><!-- 

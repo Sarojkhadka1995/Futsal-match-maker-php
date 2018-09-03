@@ -26,12 +26,10 @@ if(isset($_POST['update'])){
 		$result=mysqli_query($con, $update_sql);
 
 		if($result){
-			header('Location:../pages/futsal_dashboard.php');
+			header('Location:../pages/futsal_dashboard.php?update_success=1');
 		}
 		else{
-			header('Refresh:5,URL=../pages/futsal_dashboard.php');
-	        echo "Update failed"."<br>";
-	        echo "Redirecting back to login page in 5 sec...";
+			header('Location:../pages/futsal_dashboard.php?update_err=1');
 		}
 	}	
 }
