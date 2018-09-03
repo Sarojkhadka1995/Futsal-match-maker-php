@@ -2,13 +2,13 @@
 include "../connections/db.php";
 session_start();
 if(isset($_POST["submit"])){
-	$s_venue=$_POST["s_venue"];
-	$query=mysqli_query($con,"SELECT * from teams where venue = '$s_venue' ");
+	$name=$_POST["futsal"];
+	$query=mysqli_query($con,"SELECT * from futsal where fname = '$name' ");
 	if(mysqli_num_rows($query)>0){ ?>
 		<!DOCTYPE html>
 		<html>
 		<head>
-		<title>Team on the basis of Venue</title>
+		<title>Futsal</title>
 		 <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
@@ -43,20 +43,24 @@ if(isset($_POST["submit"])){
 						<table class="table table-hover">
 					      <thead>
 					        <tr>
-					          <th scope="col">Team Name</th>
-					          <th scope="col">Preferred Venue</th>
-					          <th scope="col">Preferred Time</th>
+					          <th scope="col">Futsal</th>
+					          <th scope="col">Location</th>
+					          <th scope="col">Opening Time</th>
+					          <th scope="col">Opening Time</th>
 					          <th scope="col">Contact</th>
+					          <th scope="col">Price</th>
 					        </tr>
 					      </thead>
 					      <tbody>
 					      	<?php while ($row=mysqli_fetch_assoc($query)) { ?>
 					      	<tr>
-								<td><?php echo $row['team_name'] ;?></td>
-								<td><?php echo $row['venue'] ;?></td>
-								<td><?php echo $row['start_time']. "-" .$row['end_time'] ;?></td>
+								<td><?php echo $row['fname'] ;?></td>
+								<td><?php echo $row['location'] ;?></td>
+								<td><?php echo $row['opening_time'];?></td>
+								<td><?php echo $row['closing_time'] ;?></td>
 								<td><?php echo $row['contact'] ;?></td>
-				            	<td><a href="../pages/viewteam.php?id=<?php echo $row['tid']; ?>">View</a> | <a href="submit_matchreq.php?id1=<?php echo $row['tid']; ?>">Play</a></td>
+								<td><?php echo $row['price'] ;?></td>
+								<td><a href="../pages/bookfutsal1.php?fid=<?php echo $row['fid']; ?>">Book</a></td>
 					        </tr>
 					        <?php } ?>
 					      </tbody>

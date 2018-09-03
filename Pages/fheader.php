@@ -55,7 +55,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
             <div class="dropdown-menu color4" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" href="../controller/check_myfutsal.php?up=1">Update Futsal</a>
               <a class="dropdown-item" href="../controller/delete_myfutsal.php?">Delete Futsal</a>
-              <a class="dropdown-item" href="#">Update Booking Table<a>
+              <a class="dropdown-item" href="#update_bookingtable">Update Booking Table<a>
             </div>
           </div>
         </li>

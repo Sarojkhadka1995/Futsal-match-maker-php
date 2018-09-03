@@ -61,17 +61,37 @@ $query=mysqli_query($con,"SELECT * from futsal");
     </button>
     </div>
 <?php } ?>
+<!-- alert showing booking success-->
+<?php if(isset($_GET['transc_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Rs.500 has been deducted from your account for booking.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+<?php } ?>
+
 <!-- alert showing booking error-->
 <?php if(isset($_GET['insert_err'])){ ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-error alert-dismissible fade show" role="alert">
     <strong>Not booked.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
     </div>
 <?php } ?>
+<!-- alert showing bank error-->
+<?php if(isset($_GET['insert_err'])){ ?>
+    <div class="alert alert-error alert-dismissible fade show" role="alert">
+    <strong>You need to have bank account inorder to book futsal.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+<?php } ?>
+
 <div class="Container" style="max-width:600px;margin:40px auto;" >  
-<form role="form" action="bookfutsal1.php" method="Post">
+<form role="form" action="bookfutsal1.php" method="GET">
 	<div class="form-group">
 	    <label class="control-label" for="fname">Select Futsal</label>
 	    <div class="form-group">
@@ -92,9 +112,9 @@ $query=mysqli_query($con,"SELECT * from futsal");
   	</div>
 </form>
 </div>
-<?php if(isset($_POST['futsal_selected'])){ ?>
+<?php if(isset($_GET['fid'])){ ?>
 	<?php 
-	$fid=$_POST['fid'];
+	$fid=$_GET['fid'];
 	//query to retrive start time and end time of selected futsal
 	$time_query=mysqli_query($con,"SELECT * from futsal where fid=$fid");
 	$time_result=mysqli_fetch_assoc($time_query);
@@ -228,6 +248,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 	</tbody>
 	</table>	
 	<!-- Booking form	 -->
+	<h4>Book Futsal</h4>
 	<div class="Container" style="max-width:600px;margin:40px auto;" >  
 	<form role="form" action="../actions/bookingfutsal.php" method="Post">
 		<div class="form-group">
@@ -264,6 +285,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 			    </div>
 			</div>
 		</div>
+		<input type="hidden" name=fid value="<?php echo $fid;?>">
 		<button type="submit" class="btn btn-primary" name="bookfutsal">Book</button>
 	</form>
 <?php } ?>

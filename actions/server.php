@@ -17,7 +17,8 @@ if (isset($_POST['signup'])) {
     $email = test_input($_POST["email"]);
     $password = test_input($_POST["password"]);
     $contact= test_input($_POST["contact"]);
-    $type = test_input($_POST["type"]);	
+    $type = test_input($_POST["type"]);
+   	
     $fullname=$fname.' '.$lname;
 
 	$check_user_query="SELECT * FROM users WHERE email='$email' LIMIT 1"; 
@@ -37,10 +38,21 @@ if (isset($_POST['signup'])) {
 		
 		if ($result) {
 			$query = mysqli_query($con, "SELECT * FROM users WHERE email='$email' AND password='$password'");
-		
+			
 		 // login users
 		    $row = mysqli_fetch_assoc($query);
 
+		    if(isset($_POST['accno'])){
+		    	$acno=$_POST['accno'];
+		    	$uid=$row['uid'];
+    			$accno=test_input($_POST['accno']);
+    			//query to add entry to bank
+		    	$bank_query=mysqli_query($con,"INSERT INTO bank(uid,accno,amount) values ('$uid','$accno',5000)");
+		    	if(!$bank_query){
+		    		header('Location:../pages/signup.php?bank_err=1');		
+		    	}
+    		}
+		    
 		    if ($type == 'player') {
 				$_SESSION['loggedUser_name']=$row['name'];
 		        $_SESSION['loggedUser'] = $row['uid'];

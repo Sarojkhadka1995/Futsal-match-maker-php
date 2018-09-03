@@ -42,6 +42,16 @@ include '../actions/server.php';
     </nav>
 <div class="Container" style="max-width:600px;margin:60px auto;" >
 	<h3>Signup Before Continuing</h3><br><br>
+	<!-- //insert into bank failed alert -->
+	<?php if(isset($_GET['bank_err'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Couldnot create bank detail.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+	<?php } ?>
+
 	<?php include "../actions/error.php" ; ?> 
 		<form  action="signup.php" method="post">
 		<div class="form-group">
@@ -76,7 +86,7 @@ include '../actions/server.php';
 		<div class="form-group">
 			<label class="control-label" for="type">Type</label>
 			<div class="form-group">
-				<select class="form-control" name="type" id="cmbSelectType">
+				<select class="form-control" name="type">
 					<option>Choose a value</option>
 					<option value="player">Player</option>
 					<option value="futsal">Futsal Owner</option>
@@ -90,6 +100,22 @@ include '../actions/server.php';
 			<div class="form-group">
 				<input class="form-control" type="number" name="contact" id="contact" placeholder="skip +977" required >
 				<span id= "err5" style="color:red;"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="contact">Bank detail</label>
+			<div class="form-group">
+				<select class="form-control" id="cmbSelectType">
+					<option>Choose a value</option>
+					<option value="no">Dont provide</option>
+					<option value="yes">Provide</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group" style="display:none;" id="Accno">
+			<label class="control-label">Account number</label>
+			<div class="form-group">
+				<input class="form-control" type="number" name="accno" placeholder="Account number" required >
 			</div>
 		</div>
 		<div style="text-align: center;" id="showBtn">
@@ -234,6 +260,16 @@ include '../actions/server.php';
 	        
 	    }
 
+	</script>
+	<script type="text/javascript">
+		$('#cmbSelectType').change(function() {
+			var type = $(this).val();
+			if (type == 'yes') {
+				$('#Accno').fadeIn('slow');
+			} else {
+				$('#Accno').hide();
+			}
+		});
 	</script>	 
 	
 </body>

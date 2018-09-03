@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +22,7 @@ session_start();
     <script> 
       $(function(){
         $("#header").load("header.php"); 
-        $("#sidebar").load("sidebar.html"); 
+      //  $("#sidebar").load("sidebar.html"); 
       });
     </script> 
     
@@ -47,6 +44,15 @@ session_start();
 <?php if(isset($_GET['err'])){ ?>
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>You are already in a team.</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php }?>
+<!--   Showing alert if player tries to create team with already present team name -->
+<?php if(isset($_GET['sameteamname'])){ ?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>There is already a team with this name.</strong>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true">&times;</span>
   </button>
@@ -208,8 +214,7 @@ session_start();
 
 </div>
 
-  <!-- Sidebar Widgets Column -->
-<div id="sidebar" class="col-md-4"></div>
+
 </div>
 </div>    
     

@@ -42,7 +42,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
   <div class="form-group">
     <label class="control-label" for="venue">Preferred venue</label>
     <div class="form-group">
-      <input class="form-control" type="text" name="venue" id="venue" placeholder="Preferred venue" required>
+      <input class="form-control" type="text" name="venue" id="venue" placeholder="Preferred futsal" required>
     </div>
   </div>  
   <div class="form-group">
