@@ -77,27 +77,27 @@ $loggeduser_id=$_SESSION['loggedUser'];
       <div class="col">
         <select class="form-control" name="member2">
             <?php
-            $query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-            while($row = mysqli_fetch_assoc($query)) { ?>
-                <option value="<?php echo $row['uid']; ?>"><?php echo $row['name']; ?></option>
+            $query1=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
+            while($row1 = mysqli_fetch_assoc($query1)) { ?>
+                <option value="<?php echo $row['uid']; ?>"><?php echo $row1['name']; ?></option>
             <?php } ?>
         </select>
       </div>
       <div class="col">
         <select class="form-control" name="member3">
             <?php
-            $query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-            while($row = mysqli_fetch_assoc($query)) { ?>
-                <option value="<?php echo $row['uid']; ?>"><?php echo $row['name']; ?></option>
+            $query2=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
+            while($row2 = mysqli_fetch_assoc($query2)) { ?>
+                <option value="<?php echo $row['uid']; ?>"><?php echo $row2['name']; ?></option>
             <?php } ?>
         </select>
       </div>
       <div class="col">
         <select class="form-control" name="member4">
             <?php
-            $query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-            while($row = mysqli_fetch_assoc($query)) { ?>
-                <option value="<?php echo $row['uid']; ?>"><?php echo $row['name']; ?></option>
+            $query3=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
+            while($row3 = mysqli_fetch_assoc($query3)) { ?>
+                <option value="<?php echo $row['uid']; ?>"><?php echo $row3['name']; ?></option>
             <?php } ?>
         </select>
       </div>

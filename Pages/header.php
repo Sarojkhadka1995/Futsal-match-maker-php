@@ -75,8 +75,15 @@ $loggeduser_id=$_SESSION['loggedUser'];
             <li class="nav-item">
               <a class="nav-link" href="player_update.php">Update</a>
             </li> -->
-            <li>
-              <a href="../pages/notification.php" class="nav-link notify">Notification<span class="badge count" style="color:red;border-radius:10px;"></span></a>
+            <li class="nav-item">
+              <div class="dropdown">
+                <a href="../pages/notification.php" class="nav-link btn dropdown-toggle notify" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notification<span class="badge count" style="color:red;border-radius:10px;"></span></a>
+                <div class="dropdown-menu color4" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="../pages/notifygame_request.php">Game request<span class="badge count" style="color:red;border-radius:10px;"></span></a>
+                  <a class="dropdown-item" href="../pages/notifygame_response.php">Game response</a>
+                  <a class="dropdown-item" href="../pages/notifymybooking.php">My booking</a>
+                </div>
+              </div>
             </li>
             <li>
               <a class="nav-link" href="../actions/logout.php">Log out</a>
@@ -146,5 +153,6 @@ $(document).ready(function(){
  
 });
 </script>
+
 </body>
 </html>

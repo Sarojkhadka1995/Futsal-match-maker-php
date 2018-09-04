@@ -358,12 +358,13 @@ $fid=$result['fid'];
       alert(uid); 
       //alert(assignment_id); 
       $.ajax({  
-          url:"../actions/view_bookeduser.php",  
+          url:"../pages/view_bookeduser.php",  
           method:"POST",  
           data:{
               uid:uid
           },  
-          success:function(data){  
+          success:function(json){ 
+              console.log(json); 
               var name = data.name;
               //document.getElementById('Idname').innerHTML=name;
               $('#Idname').html(data.contact);  

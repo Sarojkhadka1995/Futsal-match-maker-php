@@ -61,16 +61,18 @@ $query=mysqli_query($con,"SELECT * from futsal");
     </button>
     </div>
 <?php } ?>
-<!-- alert showing booking success-->
+<br>
+<div>
+<!-- alert showing transac success-->
 <?php if(isset($_GET['transc_success'])){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Rs.500 has been deducted from your account for booking.</strong>
+    <strong>Booking successful.<br>Rs.500 has been deducted from your account for booking.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
     </div>
 <?php } ?>
-
+</div>
 <!-- alert showing booking error-->
 <?php if(isset($_GET['insert_err'])){ ?>
     <div class="alert alert-error alert-dismissible fade show" role="alert">

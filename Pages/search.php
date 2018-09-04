@@ -48,7 +48,7 @@
   </div>
 
 <?php } ?>
-<div class="col-md-4">            
+<div class="col-md-8">            
 <!-- Search Widget -->
 <div class="card my-4">
   <div border="1">  
