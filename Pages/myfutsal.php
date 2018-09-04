@@ -16,6 +16,9 @@ $result=mysqli_fetch_assoc($query);
 <meta name="author" content="">
 
 <!-- Bootstrap core CSS -->
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->

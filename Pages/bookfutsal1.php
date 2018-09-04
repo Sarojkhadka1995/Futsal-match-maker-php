@@ -75,7 +75,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 </div>
 <!-- alert showing booking error-->
 <?php if(isset($_GET['insert_err'])){ ?>
-    <div class="alert alert-error alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Not booked.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -83,8 +83,8 @@ $query=mysqli_query($con,"SELECT * from futsal");
     </div>
 <?php } ?>
 <!-- alert showing bank error-->
-<?php if(isset($_GET['insert_err'])){ ?>
-    <div class="alert alert-error alert-dismissible fade show" role="alert">
+<?php if(isset($_GET['bank_err'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>You need to have bank account inorder to book futsal.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -250,9 +250,9 @@ $query=mysqli_query($con,"SELECT * from futsal");
 	</tbody>
 	</table>	
 	<!-- Booking form	 -->
-	<h4>Book Futsal</h4>
 	<div class="Container" style="max-width:600px;margin:40px auto;" >  
 	<form role="form" action="../actions/bookingfutsal.php" method="Post">
+		<h4>Book Futsal</h4>
 		<div class="form-group">
 		    <label class="control-label">Time</label>
 		    <div class="form-group">

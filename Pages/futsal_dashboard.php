@@ -35,7 +35,6 @@ $fid=$result['fid'];
     <script> 
       $(function(){
         $("#fheader").load("../pages/fheader.php"); 
-        $("#sidebar").load("sidebar.html"); 
       });
     </script> 
  
@@ -138,22 +137,42 @@ $fid=$result['fid'];
 <?php } ?>
 <!-- alert showing booking error-->
 <?php if(isset($_GET['insert_err'])){ ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Not booked.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
     </div>
 <?php } ?>
-<!-- alert showing booking error-->
+<!-- alert showing view error -->
 <?php if(isset($_GET['viewdetail_err'])){ ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Couldnot view.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
     </div>
 <?php } ?>
+<!-- Error No booking made-->
+  <?php if(isset($_GET['nobooking'])){?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>You dont have any booking.
+      </strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <?php } ?>
+  <!-- Error in booking -->
+  <?php if(isset($_GET['error'])){?>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Booking unsuccessful. Please select time with one hour gap. Eg 6-7 , 4-5
+      </strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <?php } ?>
 
   <?php 
   //query to retrive start time and end time of futsal
@@ -229,57 +248,63 @@ $fid=$result['fid'];
         <?php }else{  ?>
           <td><?php $sun_check=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$as_time' and e_time='$ae_time' and day='Sun' ");
             $result=mysqli_fetch_assoc($sun_check); 
-            if(mysqli_num_rows($sun_check)>0){
-            echo "Booked"; ?><button class="btn btn-primary view" id="<?php echo $result['uid'];?>">View</button>
+            if(mysqli_num_rows($sun_check)>0){ ?>
+            <button class="btn btn-primary view" id="<?php echo $result['uid'];?>">Booked</button>
             <?php }
             else{
               echo "Free";
             } ?>
           </td>
-          <td><?php $day_check=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$as_time' and e_time='$ae_time' and day='Mon' ");
-            if(mysqli_num_rows($day_check)>0){
-            echo "Booked";
-            }
+          <td><?php $mon_check=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$as_time' and e_time='$ae_time' and day='Mon' ");
+            $result=mysqli_fetch_assoc($mon_check);
+            if(mysqli_num_rows($mon_check)>0){
+            ?><button class="btn btn-primary view" id="<?php echo $result['uid'];?>">Booked</button>
+            <?php }
             else{
               echo "Free";
             } ?>
           </td>
           <td><?php $day_check=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$as_time' and e_time='$ae_time' and day='Tue' ");
+            $result=mysqli_fetch_assoc($day_check);
             if(mysqli_num_rows($day_check)>0){
-            echo "Booked";
-            }
+            ?><button class="btn btn-primary view" id="<?php echo $result['uid'];?>">Booked</button>
+            <?php }
             else{
               echo "Free";
             } ?>
           </td>
           <td><?php $day_check=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$as_time' and e_time='$ae_time' and day='Wed' ");
+            $result=mysqli_fetch_assoc($day_check);          
             if(mysqli_num_rows($day_check)>0){
-            echo "Booked";
-            }
+            ?><button class="btn btn-primary view" id="<?php echo $result['uid'];?>">Booked</button>
+            <?php }
             else{
               echo "Free";
             } ?>
           </td>
           <td><?php $day_check=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$as_time' and e_time='$ae_time' and day='Thur' ");
+            $result=mysqli_fetch_assoc($day_check);
             if(mysqli_num_rows($day_check)>0){
-            echo "Booked";
-            }
+            ?><button class="btn btn-primary view" id="<?php echo $result['uid'];?>">Booked</button>
+            <?php }
             else{
               echo "Free";
             } ?>
           </td>
           <td><?php $day_check=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$as_time' and e_time='$ae_time' and day='Fri' ");
+            $result=mysqli_fetch_assoc($day_check);
             if(mysqli_num_rows($day_check)>0){
-            echo "Booked";
-            }
+            ?><button class="btn btn-primary view" id="<?php echo $result['uid'];?>">Booked</button>
+            <?php }
             else{
               echo "Free";
             } ?>
           </td>
           <td><?php $day_check=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$as_time' and e_time='$ae_time' and day='Sat' ");
+            $result=mysqli_fetch_assoc($day_check);
             if(mysqli_num_rows($day_check)>0){
-            echo "Booked";
-            }
+            ?><button class="btn btn-primary view" id="<?php echo $result['uid'];?>">Booked</button>
+            <?php }
             else{
               echo "Free";
             } ?>
@@ -292,7 +317,7 @@ $fid=$result['fid'];
 <a name="update_bookingtable">    
   <!-- Update form  -->
   <div class="Container" style="max-width:600px;margin:40px auto;" >  
-  <form role="form" action="../actions/bookingfutsal.php" method="Post">
+  <form role="form" action="../actions/updatefutsalbooking.php" method="Post">
     <h4>UPDATE FUTSAL</h4>
     <div class="form-group">
         <label class="control-label">Time</label>
@@ -337,25 +362,26 @@ $fid=$result['fid'];
 <div id="dataModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">  
     <div class="modal-dialog" role="document">  
        <div class="modal-content">  
-            <div class="modal-header" style="background-color:#091834 !important ;">  
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>  
-                 <h4 class="modal-title" style="color: #ffffff !important; size: 4px !important;">Details</h4>  
+            <div class="modal-header" style="background-color:#212529 !important ;">  
+                 <h5 class="modal-title" style="color: #ffffff !important;">Details</h5>
+                 <button type="button" style="color: #ffffff !important;" class="close" data-dismiss="modal" aria-label="Close">&times;</button>  
             </div>  
             <div class="modal-body">
-                <label>Name</label><p id="Idname"></p>  
+                <label>Name: </label><textfield id="Idname"></textfield><br>  
+                <Label>Email: </Label><span id="Idemail"></span><br>
+                <Label>Contact: </Label><span id="Idcontact"></span><br>
             </div>  
             <div class="modal-footer">  
-                 <button type="button" style="background-color:   #091834 !important ;color:#ffffff !important;" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="button" style="background-color:#212529 !important ;color:#ffffff !important;" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>  
        </div>  
     </div> 
 </div> 
-
 <script>
   $(document).ready(function(){
     $('.view').click(function(){
       var uid = $(this).attr("id");
-      alert(uid); 
+     // alert(uid); 
       //alert(assignment_id); 
       $.ajax({  
           url:"../pages/view_bookeduser.php",  
@@ -365,9 +391,13 @@ $fid=$result['fid'];
           },  
           success:function(json){ 
               console.log(json); 
-              var name = data.name;
-              //document.getElementById('Idname').innerHTML=name;
-              $('#Idname').html(data.contact);  
+              var reply = json;
+              var obj = JSON.parse(reply);
+              console.log(obj);
+             // document.getElementById("Idname").innerHTML = obj.name + ", " + obj.contact;
+              $('#Idname').html(obj.name);
+              $('#Idemail').html(obj.email);
+              $('#Idcontact').html(obj.contact);  
               $('#dataModal').modal("show");  
           }  
       });  

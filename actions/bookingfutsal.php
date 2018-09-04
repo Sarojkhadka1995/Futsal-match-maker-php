@@ -8,10 +8,17 @@ if(isset($_POST['bookfutsal'])){
 	$result=mysqli_fetch_assoc($owner_query);
 	$owner_id=$result['uid'];
 
-	//$query to check bank acount
-	$query_bank=mysqli_query($con,"SELECT bnk_id from bank where uid=$id or uid=$owner_id");
-	if(mysqli_num_rows($query_bank)==0){
-		header('Location:../pages/bookfutsal1.php?bank_err=1');
+	//query to get type of user currently active
+	$type_query=mysqli_query($con,"SELECT type from users where uid='$id'");
+	$type_result=mysqli_fetch_assoc($type_query);
+	$type_val=$type_result['type'];
+	var_dump($type_val);
+	if($type_val=="player"){
+		//$query to check bank acount of player only
+		$query_bank=mysqli_query($con,"SELECT bnk_id from bank where uid=$id ");
+		if(mysqli_num_rows($query_bank)==0){
+			header('Location:../pages/bookfutsal1.php?bank_err=1');
+		}
 	}else{
 		$bid=$_POST['bid'];
 		$s_time=$_POST['s_time'];

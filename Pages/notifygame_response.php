@@ -74,7 +74,7 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 				        <td><?php echo $row2['location']; ?></td>
 				        <td><?php echo $row2['start_time'] ;?></td>
 				        <td><?php echo $row2['end_time'] ;?></td>
-		          		<td><input type="button" class="btn btn-primary view" value="View" id="<?php echo $row2['gid']; ?>">|<a href="./pages/bookfutsal.php"><button type="button" class="btn btn-success" id="showBtn">Book</button></a>|<a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Delete</button></a></td>	
+		          		<td><input type="button" class="btn btn-primary view" value="View" id="<?php echo $row2['gid']; ?>">|<a href="../pages/bookfutsal1.php"><button type="button" class="btn btn-success">Book</button></a>|<a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Delete</button></a></td>	
 		          	</tr>
 		          	<?php } ?>	    		
 		    	</tbody>

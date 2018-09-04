@@ -56,7 +56,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
                 <div class="dropdown-menu color4" aria-labelledby="dropdownMenuLink">
                   <a class="dropdown-item" href="../controller/myteam_check.php">My Team</a>
                   <a class="dropdown-item" href="allteam.php">All Team</a>
-                  <a class="dropdown-item" href="futsal.html">Futsal<a>
+                  <a class="dropdown-item" href="../pages/allfutsal.php">Futsal<a>
                 </div>
               </div>   
             </li>
@@ -71,10 +71,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
                   <a class="dropdown-item" href="../pages/bookfutsal1.php">Book Futsal</a>
                 </div>
               </div>   
-            </li><!-- 
-            <li class="nav-item">
-              <a class="nav-link" href="player_update.php">Update</a>
-            </li> -->
+            </li>
             <li class="nav-item">
               <div class="dropdown">
                 <a href="../pages/notification.php" class="nav-link btn dropdown-toggle notify" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notification<span class="badge count" style="color:red;border-radius:10px;"></span></a>
@@ -93,22 +90,8 @@ $loggeduser_id=$_SESSION['loggedUser'];
       </div>
     </nav>
 
-     <!-- Modal -->
-<!-- <div class="modal fade" id="createTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header body">
-        <h5 class="modal-title" id="exampleModalLabel">Create Team</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-    </div>
-  </div>
-</div> -->
+
+     
 
 <!-- Bootstrap core JavaScript -->
 
