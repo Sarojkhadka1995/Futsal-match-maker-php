@@ -47,7 +47,10 @@ if( isset($_POST['update'])){
 		$password=md5($password);
 		$update_sql="UPDATE users SET name= '$name' ,email='$email',password='$password',contact='$contact' WHERE uid= $uid ";
 		$result=mysqli_query($con, $update_sql);
-
+		if(isset($_POST['accno'])){
+			$account=$_POST['accno'];
+			$update_bank="UPDATE bank set accno='$account' where uid=$uid";
+		}
 		if($result){
 			header('Location:../pages/player_dashboard.php');
 		}

@@ -29,13 +29,15 @@
     <div class="form-group">
       <label class="control-label" for="name">Futsal name</label>
       <div class="form-group">
-        <input type="text" class="form-control" name="futsalname" placeholder="Futsal name" required>
+        <input type="text" class="form-control" name="futsalname" placeholder="Futsal name" onchange="validate_name(this.value)" required>
+        <span id= "err1" style="color:red;"></span>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label" for="venue">Location</label>
       <div class="form-group">
-        <input class="form-control" type="text" name="venue" id="venue" placeholder="Location" required>
+        <input class="form-control" type="text" name="venue" id="venue" placeholder="Location" onchange=" validate_location(this.value)" required>
+        <span id= "err2" style="color:red;"></span>
       </div>
     </div>  
     <div class="form-group">
@@ -53,19 +55,119 @@
     <div class="form-group">
       <label class="control-label" for="price">Price</label>
       <div class="form-group">
-        <input class="form-control" type="text" name="price" id="price" placeholder="per hr">
-        <span id= "err5" style="color:red;"></span>
+        <input class="form-control" type="text" name="price" id="price" onchange="validate_prive(this.value)" placeholder="per hr">
+        <span id= "err3" style="color:red;"></span>
       </div>
     </div>  
     <div class="form-group">
       <label class="control-label" for="contact">Contact</label>
       <div class="form-group">
-        <input class="form-control" type="number" name="contact" id="contact" placeholder="+977-XXXXXXXXXX">
-        <span id= "err6" style="color:red;"></span>
+        <input class="form-control" type="number" name="contact" id="contact" onchange="validate_contact(this.value)" placeholder="+977-XXXXXXXXXX">
+        <span id= "err4" style="color:red;"></span>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" class="btn btn-default">Create</button>
+    <div id="showBtn">
+      <button type="submit" class="btn btn-primary" class="btn btn-default">Create</button>
+    </div>
   </form>
 </div>
+<script type="text/javascript">
+    var f = 1;
+    var c = 1;
+    var l = 1;
+    var p = 1;
+    function validate_name(val){
+      var pat_name=/^[a-zA-Z ]+$/;
+      if (!pat_name.test(val)){
+          document.getElementById('err1').innerHTML="This is invalid Name";
+        f = 0;
+      }else{
+        document.getElementById('err1').innerHTML=" ";
+        f = 1;
+      }
+      if (f==1 && c==1 && l==1 && p==1) {
+      $('#showBtn').fadeIn('slow');
+      } else {
+        $('#showBtn').hide();
+      }
+    }
+
+    function validate_location(val){
+      var pat_location=/^[a-zA-Z ]+$/;
+      if (!pat_location.test(val)){
+          document.getElementById('err2').innerHTML="This is invalid Location";
+        f = 0;
+      }else{
+        document.getElementById('err2').innerHTML=" ";
+        f = 1;
+      }
+      if (f==1 && c==1 && l==1 && p==1) {
+      $('#showBtn').fadeIn('slow');
+      } else {
+        $('#showBtn').hide();
+      }
+    }
+    function validate_price(val){
+      var pat_price=/^[0-9]+$/; 
+      if (!pat_price.test(val)){
+          document.getElementById('err3').innerHTML="Please provide valid price in number.";
+        f = 0;
+      }else{
+        document.getElementById('err3').innerHTML=" ";
+        f = 1;
+      }
+      if (f==1 && c==1 && l==1 && p==1) {
+      $('#showBtn').fadeIn('slow');
+      } else {
+        $('#showBtn').hide();
+      } 
+    }
+
+    function validate_contact(val) {  
+    
+      // set endpoint and your access key
+      var access_key = '5b4c4477c1bfc92253c9ee5c980605e4';
+      var phone_number = val;
+      
+
+      // verify phone number via AJAX call
+      $.ajax({
+          url: 'http://apilayer.net/api/validate?access_key=' + access_key + '&number=' + phone_number + '&format=1&country_code=NP',   
+          dataType: 'jsonp',
+          success: function(json) {
+
+            // Access and use your preferred validation result objects
+            var valid=json.valid;
+            var linetyp=json.line_type;
+            //alert(linetyp);
+            if (valid!=1 || linetyp=="special_services"){
+              n=0;
+              document.getElementById('err4').innerHTML="Invaid number";
+            $('#showBtn').hide();
+          //    $.alert({
+          //      title: 'Invalid Number',
+        //        content: 'Invalid Phone number!',
+            // });  
+            }
+            else{
+              document.getElementById('err4').innerHTML="";
+              $('#showBtn').fadeIn('slow');
+            }
+            console.log(json.country_code);
+            console.log(json.carrier);
+            console.log(json.local_format);
+            console.log(json.country_name);
+            console.log(json.international_format);
+            console.log(json.location);
+            console.log(json.line_type);
+            },
+            async: false // <- this turns it into synchronous
+
+          });
+          
+      }
+
+
+</script>
 </body>
 </html>

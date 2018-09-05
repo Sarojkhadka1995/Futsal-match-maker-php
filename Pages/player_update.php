@@ -6,6 +6,8 @@ $loggeduser_name=$_SESSION['loggedUser_name'];
 $loggeduser_id=$_SESSION['loggedUser'];
 $query=mysqli_query($con,"SELECT * FROM users where uid= $loggeduser_id");
 $row = mysqli_fetch_assoc($query);
+$query_acc=mysqli_query($con,"SELECT * from bank where uid= $loggeduser_id");
+$result_acc=mysqli_fetch_assoc($query_acc);
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,7 +33,7 @@ $row = mysqli_fetch_assoc($query);
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navcolor">
   <div class="container">
-    <a class="navbar-brand" href="#">Futsal Match Maker</a>
+    <a class="navbar-brand" href="../pages/player_dashboard.php">Futsal Match Maker</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -64,7 +66,6 @@ $row = mysqli_fetch_assoc($query);
 			<div class="form-group">
 				<input type="email" name="email" id="email" class="form-control" value="<?php echo $row["email"]; ?>" onchange="check_email(this.value)" required email >
 				<span id='err3' style="color:red;"></span>
-				<span id='err1' style="color:red;"></span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -79,6 +80,13 @@ $row = mysqli_fetch_assoc($query);
 			<label class="control-label" for="contact">Contact</label>
 			<div class="form-group">
 				<input class="form-control" type="number" name="contact" id="contact" value="<?php echo $row["contact"]; ?>" required >
+				<span id= "err5" style="color:red;"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="account">Account no</label>
+			<div class="form-group">
+				<input class="form-control" type="number" name="accno" value="<?php echo $result_acc["accno"]; ?>"  >
 				<span id= "err5" style="color:red;"></span>
 			</div>
 		</div>
@@ -132,17 +140,17 @@ $row = mysqli_fetch_assoc($query);
 			//alert("inside validate email");
 			var email_address= val;
 			
-			$.ajax({
-				url:"../actions/update.php",
-				method:"post",
-				data:{
-					email:email_address,
-					uid:<?php echo $_SESSION['loggedUser']; ?>
-				},
-			success:function(data){
-				$('#err1').html(data);
-				}
-			})
+			// $.ajax({
+			// 	url:"../actions/update.php",
+			// 	method:"post",
+			// 	data:{
+			// 		email:email_address,
+			// 		uid:<?php echo $_SESSION['loggedUser']; ?>
+			// 	},
+			// success:function(data){
+			// 	$('#err1').html(data);
+			// 	}
+			// })
 
 			// set endpoint and your access key
 			var access_key = '4a51d0df3e83a362e1913ece36a02ace';

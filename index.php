@@ -5,10 +5,17 @@
   <title>Login</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/blog-home.css" rel="stylesheet">
@@ -45,7 +52,7 @@
   <div class="form-group">
     <label class="control-label" for="name">Username</label>
       <div class="form-group">
-        <input type="text" class="form-control" name="username" placeholder="Username" required>
+        <input type="text" class="form-control" name="username" onchange="validate_user(this.value)" placeholder="Username" required>
         <span id="err1" style="color:red;"></span>        
       </div>
   </div>
@@ -67,20 +74,37 @@ var u=1;
 var p=1;
 
 function validate_user(val){
-  var pat_email= /^[a-zA-Z]+[a-zA-Z0-9._-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,4}$/;
-  var pat_num=/^[0-9]{10}$/;
-  if(pat_num.test(val) || pat_email.test(val)){
-    document.getElementById('err1').innerHTML=" ";
-      u = 1;
-  }else{
-    document.getElementById('err1').innerHTML="This is invalid Username";
-      u = 0;
-  }
-  if (u==1 && p==1) {
-    $('#showBtn').fadeIn('slow');
-  }else{
-    $('#showBtn').hide();
-  }
+  // set endpoint and your access key
+      var access_key = '4a51d0df3e83a362e1913ece36a02ace';
+      var email_address = val;
+      //alert(email_address);
+
+      // verify email address via AJAX call
+      $.ajax({
+          url: 'http://apilayer.net/api/check?access_key=' + access_key + '&email=' + email_address+'&smtp=1&format=1',   
+          dataType: 'jsonp',
+          success: function(json) {
+            var valid = json.format_valid;
+            var smtp = json.smtp_check;
+            var mx = json.mx_found;
+            if( valid!=1 || smtp!=1 || mx!=1){
+              e=0;
+            document.getElementById('err1').innerHTML="Invaid Email";
+            $('#showBtn').hide();
+          }else{
+            document.getElementById('err1').innerHTML="";
+              $('#showBtn').fadeIn('slow');
+          }
+
+ 
+          // Access and use your preferred validation result objects
+          console.log(json.format_valid);
+          console.log(json.smtp_check);
+          console.log(json.mx_found);
+          console.log(json.score);
+                      
+          }
+      });
 }
 
 function validate_password(val){      

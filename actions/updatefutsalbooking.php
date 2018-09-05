@@ -7,7 +7,7 @@ if(isset($_POST['bookfutsal'])){
 	$s_time=$_POST['s_time'];
 	$e_time=$_POST['e_time'];
 	$day=$_POST['day'];
-	var_dump($s_time);
+	//var_dump($s_time);
 	$array1=explode(":",$s_time);
 	$array2=explode(":",$e_time);
 	$st=$array1[0];
@@ -17,7 +17,6 @@ if(isset($_POST['bookfutsal'])){
 	if($st!=$et){
 		header('Location:../pages/futsal_dashboard.php?error=1');
 	}else{
-		die();
 		$query=mysqli_query($con,"SELECT * from booking_details where bid=$bid and s_time='$s_time' and e_time='$e_time' and day='$day' ");
 		if(!$query){
 			echo ("Search query failed.");

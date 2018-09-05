@@ -13,9 +13,9 @@ $query=mysqli_query($con,"SELECT * from futsal");
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +34,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script>
 	  	$(function(){
-	  		$("#header").load("fheader.php");
+	  		$("#header").load("header.php");
 	  	//	$("#sidebar").load("sidebar.html");
 	  	});
 	</script>

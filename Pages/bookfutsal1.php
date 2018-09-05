@@ -18,6 +18,9 @@ $query=mysqli_query($con,"SELECT * from futsal");
     <title>Futsal Management System</title>
 
   <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap core CSS -->
 
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,6 +46,15 @@ $query=mysqli_query($con,"SELECT * from futsal");
    
 <!-- Calling header -->
 <div id="header"></div>
+<!-- alert showing not booked due to time range -->
+<?php if(isset($_GET['error'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Booking unsuccessful. Please select time with one hour gap. Eg 6-7 , 4-5</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+<?php } ?>
 <!-- alert showing not free -->
 <?php if(isset($_GET['book_err'])){ ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -55,24 +67,23 @@ $query=mysqli_query($con,"SELECT * from futsal");
 <!-- alert showing booking success-->
 <?php if(isset($_GET['book_success'])){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Successully booked.</strong>
+    <strong>Successully booked.<br>Rs.500 has been deducted from your account as booking charge.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
     </div>
 <?php } ?>
-<br>
-<div>
+
 <!-- alert showing transac success-->
-<?php if(isset($_GET['transc_success'])){ ?>
+<!-- <?php if(isset($_GET['transc_success'])){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Booking successful.<br>Rs.500 has been deducted from your account for booking.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
     </div>
-<?php } ?>
-</div>
+<?php } ?> -->
+
 <!-- alert showing booking error-->
 <?php if(isset($_GET['insert_err'])){ ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">

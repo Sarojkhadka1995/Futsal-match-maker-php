@@ -10,7 +10,7 @@ if (isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
     //$password=md5($password);
-    $query = mysqli_query($con, "SELECT * FROM users WHERE (email='$username' or contact='$username') AND password='$password' ");
+    $query = mysqli_query($con, "SELECT * FROM users WHERE email='$username' AND password='$password' ");
     if (mysqli_num_rows($query) > 0) {
         // login users
         $row = mysqli_fetch_assoc($query);

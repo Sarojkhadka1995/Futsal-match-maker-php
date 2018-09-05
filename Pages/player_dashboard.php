@@ -39,6 +39,15 @@
   <div class="row">
   <!-- Main body -->
     <div class="col-md-8">
+      <!-- alert showing team no present -->
+<?php if(isset($_GET['team_err'])){ ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Team doesnot exist.</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+<?php } ?>
       <!--   Showing team create alert preventing player from creating multiple team -->
       <?php if(isset($_GET['err'])){ ?>
       <div class="alert alert-warning alert-dismissible fade show" role="alert">

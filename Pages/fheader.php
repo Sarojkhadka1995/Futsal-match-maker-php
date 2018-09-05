@@ -44,7 +44,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
              <!--Dropdown link of view -->
             <div class="dropdown-menu color4" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" href="../controller/check_myfutsal.php">My Futsal</a>
-              <a class="dropdown-item" href="../pages/fowner_booking.php">My booking</a>
+              <a class="dropdown-item" href="../actions/fowner_booking.php">My booking</a>
             </div>
           </div>   
         </li>
