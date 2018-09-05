@@ -71,7 +71,7 @@ if(isset($_POST["submit"])){
 		</body>
 		</html>
 	<?php }else{
-		header('Location:../pages/search.php?err_time=1');
+		header('Location:../pages/player_dashboard.php?err_time=1');
 	}	
 }
 ?>

@@ -5,7 +5,7 @@ require "credintial.php";
 
 $mail = new PHPMailer;
 
-//$mail->SMTPDebug = 4;                               // Enable verbose debug output
+$mail->SMTPDebug = 4;                               // Enable verbose debug output
 
 $mail->isSMTP();                                      // Set mailer to use SMTP
 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
@@ -15,8 +15,8 @@ $mail->Password = PASS;                           // SMTP password
 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                                    // TCP port to connect to
 
-$mail->setFrom(EMAIL, 'USERNAME');
-$mail->addAddress('TO@gmail.com', 'USERNAME');     // Add a recipient
+$mail->setFrom(EMAIL, 'Milan Kaucha');
+$mail->addAddress('milakaucha10@gmail.com', 'Milan');     // Add a recipient
 
 /*$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 $mail->addAttachment('/tmp/image.jpg', 'new.jpg');*/    // Optional name

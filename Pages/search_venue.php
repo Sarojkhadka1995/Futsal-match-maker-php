@@ -73,7 +73,7 @@ if(isset($_POST["submit"])){
 		</body>
 		</html>
 	<?php }else{
-		header('Location:../pages/search.php?venue_err=1');
+		header('Location:../pages/player_dashboard.php?venue_err=1');
 	}	
 }
 ?>
