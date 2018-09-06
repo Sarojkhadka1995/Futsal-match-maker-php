@@ -36,11 +36,15 @@ $row=mysqli_fetch_assoc($query2);
 <script> 
 $(function(){
   $("#header").load("../pages/header.php"); 
-  //$("#sidebar").load("sidebar.html"); 
+   
 });
 </script> 
 </head>
 <body class="body">
+  <!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- navigation header -->
 <div id="header"></div>
 <!--Remaining section-->
 <div class="container">
@@ -75,7 +79,6 @@ $(function(){
       </table>
     </div>
   </div>
-<div id="sidebar" class="col-md-4"></div>
 </div>
 </div>
 

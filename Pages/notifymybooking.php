@@ -105,6 +105,8 @@ if(mysqli_num_rows($query)==0){
 			<!-- <div id="sidebar" class="col-md-3"></div> -->
 		</div>
 	</div>
+	
+
 </body>
 </html>
 

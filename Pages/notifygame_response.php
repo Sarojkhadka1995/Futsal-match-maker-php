@@ -51,6 +51,14 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 	<div class="row">
 		<!--Entries Column -->
 			<div class="col-md-9">
+				<?php if(isset($_GET['success'])){ ?>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+					    <strong>Game delete successful.</strong>
+					    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					    </button>
+				    </div>
+				<?php }?>
 				<div style="text-align: center">
 					<h4>Game Response</h4>
 			</div>

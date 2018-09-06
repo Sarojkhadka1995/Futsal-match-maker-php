@@ -49,7 +49,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 <!-- alert showing not booked due to time range -->
 <?php if(isset($_GET['same_time'])){ ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Booking unsuccessful. You have another booking for the same time in other futsal</strong>
+    <strong>Are you sure you want to book on this time?<br>You have already made booking with this time.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
