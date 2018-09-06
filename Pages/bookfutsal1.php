@@ -47,6 +47,15 @@ $query=mysqli_query($con,"SELECT * from futsal");
 <!-- Calling header -->
 <div id="header"></div>
 <!-- alert showing not booked due to time range -->
+<?php if(isset($_GET['same_time'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Booking unsuccessful. You have another booking for the same time in other futsal</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+<?php } ?>
+<!-- alert showing not booked due to time range -->
 <?php if(isset($_GET['error'])){ ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Booking unsuccessful. Please select time with one hour gap. Eg 6-7 , 4-5</strong>

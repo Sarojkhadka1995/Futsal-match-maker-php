@@ -48,6 +48,24 @@
    
   <!-- Calling header -->
   <div id="header"></div>
+  <!-- alert showing team no game -->
+  <?php if(isset($_GET['already'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Match create failed.<br>You already have accepted game for this date and time.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!-- alert showing team no game -->
+  <?php if(isset($_GET['nogame_err'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>You dont have any accepted game.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
   <!-- alert showing team no present -->
   <?php if(isset($_GET['team_err'])){ ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -79,6 +97,15 @@
   <?php if(isset($_GET['err_myteam'])){ ?>
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>You are not in any team.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <?php }?>
+  <!--   Showing view myteam and leave team error creating alert if player is not in any team -->
+  <?php if(isset($_GET['noteam'])){ ?>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>You are not in any team, you need to be in team.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>

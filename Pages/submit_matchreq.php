@@ -58,10 +58,11 @@ $query=mysqli_query($con,"SELECT * from futsal");
         </div>
     </div>
     <div class="form-group">
-		<label class="control-label" for="location">Location</label>
-		<div class="form-group">
-			<input class="form-control" type="text" name="location" placeholder="Location" required>
-		</div>
+  		<label class="control-label" for="location">Location</label>
+  		<div class="form-group">
+  			<input class="form-control" type="text" name="location" onchange="validate_location(this.value)" placeholder="Location" required>
+  		  <span id="err1" style="color:red;">
+      </div>
     </div>  
     <div class="form-group">
     	<div class="form-row">
@@ -81,10 +82,46 @@ $query=mysqli_query($con,"SELECT * from futsal");
     		<input type="date" name="date" placeholder="date">
     	</div>
     </div>
-    <div class="form-group">
+    <div class="form-group showBtn">
     	<button type="submit" name="matchcreator" class="btn btn-info">Create Match</button>
     </div>
 </form>
 </div>
+<script type="text/javascript">
+  f=0;
+  // l=0;
+  // function validate_name(val){
+  //   var pat_name=/^[a-zA-Z ]+$/;
+  //   if (!pat_name.test(val)){
+  //       document.getElementById('err').innerHTML="This is invalid Name";
+  //     f = 0;
+  //   }else{
+  //     document.getElementById('err').innerHTML=" ";
+  //     f = 1;
+  //   }
+  //   if (f==1 && l==1) {
+  //   $('#showBtn').fadeIn('slow');
+  //   } else {
+  //     $('#showBtn').hide();
+  //   }
+  // }
+
+  function validate_location(val){
+    var pat_name=/^[a-zA-Z ]+$/;
+    if (!pat_name.test(val)){
+        document.getElementById('err1').innerHTML="This is invalid Location, please enter text.";
+      f = 0;
+    }else{
+      document.getElementById('err1').innerHTML=" ";
+      f = 1;
+    }
+    if (f==1) {
+    $('#showBtn').fadeIn('slow');
+    } else {
+      $('#showBtn').hide();
+    }
+  }
+
+</script>
 </body>
 </html>

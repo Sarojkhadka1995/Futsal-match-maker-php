@@ -42,7 +42,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navcolor">
       <div class="container-fluid">
         <a class="navbar-brand" href="../pages/player_dashboard.php">Futsal Match Maker</a>
-        <h6 style="color: green !important;"><?php echo $loggeduser_name; ?></h6>
+        <!-- <h6 style="color: green !important;"><?php echo $loggeduser_name; ?></h6> -->
         
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
@@ -57,6 +57,7 @@ $loggeduser_id=$_SESSION['loggedUser'];
                   <a class="dropdown-item" href="../controller/myteam_check.php">My Team</a>
                   <a class="dropdown-item" href="allteam.php">All Team</a>
                   <a class="dropdown-item" href="../pages/allfutsal.php">Futsal<a>
+                  <a class="dropdown-item" href="../controller/mygame_check.php">My games</a>
                 </div>
               </div>   
             </li>
@@ -82,9 +83,15 @@ $loggeduser_id=$_SESSION['loggedUser'];
                 </div>
               </div>
             </li>
-            <li>
-              <a class="nav-link" href="../actions/logout.php">Log out</a>
-            </li>  
+            <li class="nav-item">
+              <div class="dropdown">
+                <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff !important;"><?php echo $loggeduser_name; ?></a>
+                 <!--Dropdown link of view -->
+                <div class="dropdown-menu color4" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="../actions/logout.php">Log out</a>
+                </div>
+              </div>   
+            </li>
           </ul>
         </div>
       </div>

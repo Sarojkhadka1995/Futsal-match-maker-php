@@ -34,26 +34,32 @@ if(isset($_POST['bookfutsal'])){
 		if($st!=$et){
 			header('Location:../pages/bookfutsal1.php?error=1');
 		}else{
-			$query=mysqli_query($con,"SELECT * from booking_details where bid='$bid' and s_time='$s_time' and e_time='$e_time' and day='$day' ");
-			if(!$query){
-				echo ("Search query failed.");
+			//query to check whether user has made booking to another futsal for same day and time
+			$same_query=mysqli_query($con,"SELECT * from booking_details where uid='$id' and s_time='$s_time' and e_time='$e_time' and day='$day' ");
+			if(mysqli_num_rows($same_query)>0){
+				header('Location:../pages/bookfutsal1.php?same_time=1');
 			}else{
-				$row_count=mysqli_num_rows($query);
-				if($row_count>0){
-					header('Location:../pages/bookfutsal1.php?book_err=1');
+				$query=mysqli_query($con,"SELECT * from booking_details where bid='$bid' and s_time='$s_time' and e_time='$e_time' and day='$day' ");
+				if(!$query){
+					echo ("Search query failed.");
 				}else{
-					$insert_query=mysqli_query($con,"INSERT INTO booking_details(bid,uid,s_time,e_time,day) VALUES($bid,'$id','$s_time','$e_time','$day')");
-					if($insert_query){
-						//to update bank we need owner id or uid of futsal owner
-						//querying bank updating data of current user to transfer money
-						$bank_query1=mysqli_query($con,"UPDATE bank set amount=amount-500 where uid=$id");
-						//querying bank updating data of current user to transfer money
-						$bank_query2=mysqli_query($con,"UPDATE bank set amount=amount+500 where uid=$owner_id");
-						//header('Location:../pages/bookfutsal1.php?transc_success=1');
+					$row_count=mysqli_num_rows($query);
+					if($row_count>0){
+						header('Location:../pages/bookfutsal1.php?book_err=1');
 					}else{
-						header('Location:../pages/bookfutsal1.php?insert_err=1');
+						$insert_query=mysqli_query($con,"INSERT INTO booking_details(bid,uid,s_time,e_time,day) VALUES($bid,'$id','$s_time','$e_time','$day')");
+						if($insert_query){
+							//to update bank we need owner id or uid of futsal owner
+							//querying bank updating data of current user to transfer money
+							$bank_query1=mysqli_query($con,"UPDATE bank set amount=amount-500 where uid=$id");
+							//querying bank updating data of current user to transfer money
+							$bank_query2=mysqli_query($con,"UPDATE bank set amount=amount+500 where uid=$owner_id");
+							//header('Location:../pages/bookfutsal1.php?transc_success=1');
+						}else{
+							header('Location:../pages/bookfutsal1.php?insert_err=1');
+						}
+						header('Location:../pages/bookfutsal1.php?book_success=1');
 					}
-					header('Location:../pages/bookfutsal1.php?book_success=1');
 				}
 			}
 		}
