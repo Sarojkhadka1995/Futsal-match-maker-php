@@ -61,7 +61,7 @@ if (isset($_POST['signup'])) {
 			else {
 		        $_SESSION['loggedUser'] = $row['uid'];
 		        $_SESSION['loggedUser_name']=$row['name'];
-		        header('Location: ../pages/futsal_dashboard.php');
+		        header('Location: ../pages/create_futsal_form.php');
 			}
 		}	
 	}	

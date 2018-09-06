@@ -173,7 +173,6 @@ $fid=$result['fid'];
       </button>
   </div>
   <?php } ?>
-
   <?php 
   //query to retrive start time and end time of futsal
   $time_query=mysqli_query($con,"SELECT * from futsal where fid=$fid");
