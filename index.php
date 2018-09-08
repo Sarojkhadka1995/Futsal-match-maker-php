@@ -52,7 +52,8 @@
   <div class="form-group">
     <label class="control-label" for="name">Username</label>
       <div class="form-group">
-        <input type="text" class="form-control" name="username" onchange="validate_user(this.value)" placeholder="Username" required>
+        <!--  cadd this to code below to validate email onchange="validate_user(this.value)" -->
+        <input type="text" class="form-control" name="username"  placeholder="Username" required>
         <span id="err1" style="color:red;"></span>        
       </div>
   </div>

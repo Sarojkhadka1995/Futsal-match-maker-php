@@ -3,7 +3,7 @@ include '../connections/db.php';
 session_start();
 if(isset($_POST['bookfutsal'])){
 	$id=$_SESSION['loggedUser'];
-	$bid=$_POST['bid'];
+	$bid=$_POST['bid'];	
 	$s_time=$_POST['s_time'];
 	$e_time=$_POST['e_time'];
 	$day=$_POST['day'];

@@ -4,8 +4,13 @@ session_start();
 $id=$_SESSION['loggedUser'];
 //query to give booking detail of user
 $query=mysqli_query($con,"SELECT * from booking_details where uid=$id");
+
 if(mysqli_num_rows($query)==0){
-	header('Location:../pages/player_dashboard.php?nobooking=1');
+	if(isset($_GET['bookdelsuccess'])){
+	header('Location:../pages/player_dashboard.php?nobooking=1&bookdelsuccess=1');	
+	}else{
+		header('Location:../pages/player_dashboard.php?nobooking=1');
+	}
 }else{ ?>
 	<!DOCTYPE html>
 <html>
@@ -76,6 +81,7 @@ if(mysqli_num_rows($query)==0){
 				          <th scope="col">Futsal</th>
 				          <th scope="col">Start time</th>
 				          <th scope="col">End time</th>
+				          <th scope="col">Day</th>
 				          <th scope="col">Action</th>
 				        </tr>
 				      </thead>

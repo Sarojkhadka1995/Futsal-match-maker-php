@@ -39,7 +39,6 @@ $query=mysqli_query($con,"SELECT * from teams where tid !='$tid' ");
 	<script>
 	  	$(function(){
 	  		$("#header").load("header.php");
-	  		$("#sidebar").load("sidebar.html");
 	  	});
 	</script>
 </head>
@@ -63,8 +62,30 @@ $query=mysqli_query($con,"SELECT * from teams where tid !='$tid' ");
 				  </button>
 				</div>
 				<?php }?>
+
+				<!-- Showing error message if a user's team has insufficient members -->
+  				<?php if(isset($_GET['insuff'])){ ?>
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				  <strong>Your team does not have sufficient members. You cannot send match request.
+				</strong>
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<?php }?>
+				
+  				<!-- Showing error message if a opponent team has insufficient members -->
+  				<?php if(isset($_GET['insuffoppo'])){ ?>
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				  <strong>Opponent team does not have sufficient members. You cannot send match request.
+				</strong>
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<?php }?>
   				<ul class="list-group list-group-flush">
-      				<li class="list-group-item body">All Other Teams</li>
+      				<li class="list-group-item body"><h3>All Other Teams</h3></li>
       			</ul>
       			<div class="container">
 					<table class="table table-hover">
@@ -93,10 +114,7 @@ $query=mysqli_query($con,"SELECT * from teams where tid !='$tid' ");
 			</div>
 			<div id="sidebar" class="col-md-4"></div>
 		</div>
-	</div>
-
-<!-- Bootstrap core JavaScript -->
-	
+	</div>	
 
 </body>
 </html>

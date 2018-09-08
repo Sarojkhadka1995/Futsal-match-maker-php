@@ -82,7 +82,24 @@ $query=mysqli_query($con,"SELECT * from futsal");
     </button>
     </div>
 <?php } ?>
-
+<!-- alert showing booking success-->
+<?php if(isset($_GET['msg'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Confirmation mail has been sent to your address.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+<?php } ?>
+<!-- alert showing booking success-->
+<?php if(isset($_GET['msgerr'])){ ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Couldnot send Confirmation mail to your address.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+<?php } ?>
 <!-- alert showing transac success-->
 <!-- <?php if(isset($_GET['transc_success'])){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -311,6 +328,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 		<button type="submit" class="btn btn-primary" name="bookfutsal">Book</button>
 	</form>
 <?php } ?>
+
 <!-- Bootstrap core JavaScript -->
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>

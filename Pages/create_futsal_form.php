@@ -14,7 +14,7 @@
 
   <script> 
     $(function(){
-      $("#header").load("../pages/header.php"); 
+      $("#header").load("../pages/fheader.php"); 
       //$("#sidebar").load("sidebar.html"); 
     });
   </script> 

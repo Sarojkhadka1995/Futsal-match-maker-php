@@ -1,6 +1,6 @@
 <?php
-	define('EMAIL','FROM@gmail.com');
+	define('EMAIL','milankaucha10@gmail.com');
 
-	define('PASS', 'FROM_EMAIL_PASSWORD)');
+	define('PASS', 'mamtaL123');
 
 ?>

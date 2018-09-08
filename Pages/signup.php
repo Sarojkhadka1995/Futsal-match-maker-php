@@ -72,7 +72,7 @@ include '../actions/server.php';
 		<div class="form-group">
 			<label for="email" class="control-label">Email</label>
 			<div class="form-group">
-				<input type="email" name="email" id="email" onchange="validate_email(this.value)"class="form-control" placeholder="someone@something.com" required email >
+				<input type="email" name="email" id="email" onchange="validate_email(this.value)" class="form-control" placeholder="someone@something.com" required email >
 				<span id='err3' style="color:red;"></span>
 			</div>
 		</div>
@@ -98,7 +98,7 @@ include '../actions/server.php';
 		<div class="form-group">
 			<label class="control-label" for="contact">Contact</label>
 			<div class="form-group">
-				<input class="form-control" type="number" name="contact" id="contact" onchange="validate_contact(this.value)" placeholder="skip +977" required >
+				<input class="form-control" type="number" name="contact" id="contact"  onchange="validate_contact(this.value)" placeholder="skip +977" required >
 				<span id= "err5" style="color:red;"></span>
 			</div>
 		</div>

@@ -376,6 +376,7 @@ $fid=$result['fid'];
        </div>  
     </div> 
 </div> 
+
 <script>
   $(document).ready(function(){
     $('.view').click(function(){

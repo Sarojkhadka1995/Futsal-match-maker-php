@@ -32,4 +32,14 @@ body {
 
 
 .body 
-{background-color: #DFDFF7 ;}
+{background-color: #DFDFF7 !important ;
+overflow-x: hidden !important;
+ }
+
+#footer{
+  background:#343a40  !important;
+  color:#ffffff !important;
+  text-align: center;
+  padding:20px;
+  margin-top:20px;
+}

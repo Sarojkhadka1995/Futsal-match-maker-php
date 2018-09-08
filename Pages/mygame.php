@@ -6,7 +6,7 @@ $query=mysqli_query($con,"SELECT tid from users where uid= '$uid' ");
 $result=mysqli_fetch_assoc($query);
 $tid=$result['tid'];
 //response notification
-$query2 = mysqli_query($con,"SELECT * from game where team1='$tid' and confirm=1"); 
+$query2 = mysqli_query($con,"SELECT * from game where team1='$tid' or team2='$tid' and confirm=1"); 
 ?>
 <!DOCTYPE html>
 <html>
@@ -77,18 +77,22 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid' and confirm=1
 		    <table class="table table-hover">
 		    	<thead>
 		        <tr>
-		          <th scope="col">Opponent Name</th>
+		          <th scope="col">Team 1</th>
+		          <th scope="col">Team 2</th>
 		          <th scope="col">Futsal</th>
 		          <th scope="col">Location</th>
 		          <th scope="col">Start time</th>
 		          <th scope="col">End time</th>
 		          <th scope="col">Date</th>
-		          <th scope="col">Action</th>
 		        </tr>
 		      	</thead>
 		    	<tbody>
 					<?php while ($row2=mysqli_fetch_assoc($query2)) { ?>
 					<tr>
+						<td><?php $opp_tid1=$row2['team1'];
+		          		$query5=mysqli_query($con,"SELECT team_name from teams where tid='$opp_tid1'");
+		          		$result5=mysqli_fetch_assoc($query5);
+		          		echo $result5['team_name']; ?></td>
 						<td><?php $opp_tid=$row2['team2'];
 		          		$query4=mysqli_query($con,"SELECT team_name from teams where tid='$opp_tid'");
 		          		$result4=mysqli_fetch_assoc($query4);
@@ -98,7 +102,9 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid' and confirm=1
 				        <td><?php echo $row2['start_time'] ;?></td>
 				        <td><?php echo $row2['end_time'] ;?></td>
 		          		<td><?php echo $row2['gdate']; ?></td>
-		          		<td><a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Cancel</button></a></td>	
+		          		<?php if($row2['team1']==$tid){ ?>
+		          		<td><a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Cancel</button></a></td>
+		          		<?php } ?>	
 		          	</tr>
 		          	<?php } ?>	    		
 		    	</tbody>

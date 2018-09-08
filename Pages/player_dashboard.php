@@ -48,6 +48,15 @@
    
   <!-- Calling header -->
   <div id="header"></div>
+  <!-- alert showing  delete sucess -->
+  <?php if(isset($_GET['bookdelsuccess'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Successfully Cancelled.<br>Amount Rs.300 has been added to your bank account.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
   <!-- alert showing team no game -->
   <?php if(isset($_GET['already'])){ ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -241,7 +250,16 @@
   <span aria-hidden="true">&times;</span>
   </button>
   </div>
+  <?php } ?>
 
+  <!-- alert showing you have accepted game  -->
+  <?php if(isset($_GET['err_accgame'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>You have a accepted match.<br>You cannot leave team.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
   <?php } ?>
   <div class="row">
     <div class="col-md-8">            
@@ -316,14 +334,14 @@
       </div>
     </div>
   </div>
-<footer>
-  <p class="text-center"> Copyright © Futsal Match Maker 2018. All right reserved. </p>
+
+  
+<!-- Footer -->
+<footer id="footer">
+  <p>Copyright Futsal Match Maker &copy; 2018</p>
 </footer>
 
-
-
-
-
+  
  
 <!-- Bootstrap core JavaScript -->
 <script src="../vendor/jquery/jquery.min.js"></script>

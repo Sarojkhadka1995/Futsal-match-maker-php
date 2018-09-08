@@ -4,6 +4,9 @@ require_once '../connections/db.php';
 $query=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
 $loggeduser_name=$_SESSION['loggedUser_name'];
 $loggeduser_id=$_SESSION['loggedUser'];
+//Retriveing information of the user trying to create team
+$user_query=mysqli_query($con,"SELECT * from users where uid='$loggeduser_id'");
+$user_result=mysqli_fetch_assoc($user_query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,48 +62,8 @@ $loggeduser_id=$_SESSION['loggedUser'];
   <div class="form-group">
     <label class="control-label" for="contact">Contact</label>
     <div class="form-group">
-      <input class="form-control" type="number" name="contact" id="contact" placeholder="+977-XXXXXXXXXX">
+      <input class="form-control" type="number" name="contact" id="contact" value="<?php echo $user_result['contact'] ; ?>" placeholder="+977-XXXXXXXXXX">
       <span id= "err5" style="color:red;"></span>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label">Members</label>
-    <div class="form-row">
-      <div class="col">
-        <select class="form-control" name="member1">
-            <?php
-            while($row = mysqli_fetch_assoc($query)) { ?>
-                <option value="<?php echo $row['uid']; ?>"><?php echo $row['name']; ?></option>
-            <?php } ?>
-        </select>
-      </div>
-      <div class="col">
-        <select class="form-control" name="member2">
-            <?php
-            $query1=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-            while($row1 = mysqli_fetch_assoc($query1)) { ?>
-                <option value="<?php echo $row['uid']; ?>"><?php echo $row1['name']; ?></option>
-            <?php } ?>
-        </select>
-      </div>
-      <div class="col">
-        <select class="form-control" name="member3">
-            <?php
-            $query2=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-            while($row2 = mysqli_fetch_assoc($query2)) { ?>
-                <option value="<?php echo $row['uid']; ?>"><?php echo $row2['name']; ?></option>
-            <?php } ?>
-        </select>
-      </div>
-      <div class="col">
-        <select class="form-control" name="member4">
-            <?php
-            $query3=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
-            while($row3 = mysqli_fetch_assoc($query3)) { ?>
-                <option value="<?php echo $row['uid']; ?>"><?php echo $row3['name']; ?></option>
-            <?php } ?>
-        </select>
-      </div>
     </div>
   </div>
   <button type="submit" class="btn btn-primary" class="btn btn-default">Create</button>

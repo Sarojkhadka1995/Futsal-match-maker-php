@@ -5,7 +5,7 @@ $id=$_SESSION['loggedUser'];
 $query=mysqli_query($con,"SELECT tid from users where uid=$id");
 $result=mysqli_fetch_assoc($query);
 $tid=$result['tid'];
-$query1=mysqli_query($con,"SELECT * from users where tid=$tid ");
+$query1=mysqli_query($con,"SELECT * from users where tid=$tid");
 $query2=mysqli_query($con,"SELECT * from teams where tid=$tid");
 $row=mysqli_fetch_assoc($query2);
 ?>
@@ -51,6 +51,51 @@ $(function(){
   <div class="row">
 <!--Entries Column -->
   <div class="col-md-8">
+    <!-- alert showing  member add sucess -->
+  <?php if(isset($_GET['add_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Member add successfully.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!-- alert showing member add fail -->
+  <?php if(isset($_GET['add_fail'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Member add failed.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!-- alert showing  member delete sucess -->
+  <?php if(isset($_GET['del_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Member delete successfully.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!-- alert showing  member delete fail -->
+  <?php if(isset($_GET['del_fail'])){ ?>
+    <div class="alert alert-alert alert-dismissible fade show" role="alert">
+    <strong>Member delete failed.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  <!-- alert showing  team captaion cannot delete himself-->
+  <?php if(isset($_GET['err'])){ ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>You are the captain of your team you cannot delete yourself.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Team Name: <?php echo " ".$row['team_name'] ;?></li>
       <li class="list-group-item">Preferred Venue: <?php echo " ".$row['venue'] ;?></li>
@@ -81,7 +126,63 @@ $(function(){
   </div>
 </div>
 </div>
+<?php 
 
+//To check whether user is a team captain or not
+$query_cap=mysqli_query($con,"SELECT * from teams where owner_id=$id");
+if(mysqli_num_rows($query_cap)>0){
+  $query3=mysqli_query($con,"SELECT * from users where tid=$tid");
+  if(mysqli_num_rows($query3)<8){
+    ?>
+    <div class="Container" style="max-width:600px;margin:40px auto;" >
+      <form action="../actions/add_member.php" method="POST">
+        <div class="form-group">
+          <label class="control-label" for="fname">Add Member</label>
+          <!-- <option type="hidden" name="tid" value="<?php echo $tid ;?>" > -->
+          <div class="form-row">
+            <div class="col">
+              <select class="form-control" name="uid">
+                <?php
+                  $query4=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
+                  while($row4 = mysqli_fetch_assoc($query4)) { ?>
+                  <option value="<?php echo $row4['uid']; ?>"><?php echo $row4['name']; ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;" id="showBtn">
+          <button  name="addmember" class="btn btn-primary" >Add</button>
+        </div>
+      </form>
+    </div>
+
+  <?php }else{ ?>
+      <div class="Container" style="max-width:600px;margin:40px auto;" >
+      <form action="../actions/del_member.php" method="POST">
+        <div class="form-group">
+          <label class="control-label" for="fname">Delete Member</label>
+          <!-- <option type="hidden" name="tid" value="<?php echo $tid ;?>" > -->
+          <div class="form-row">
+            <div class="col">
+              <select class="form-control" name="uid">
+                <?php
+                //query to retrive players in the team
+                  $team_players=mysqli_query($con,"SELECT * from users where tid=$tid");
+                  while($result_players=mysqli_fetch_assoc($team_players)) { ?>
+                  <option value="<?php echo $result_players['uid']; ?>"><?php echo $result_players['name']; ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;" id="showBtn">
+          <button  name="delmember" class="btn btn-danger" >Delete</button>
+        </div>
+      </form>
+    </div>  
+   <?php }  
+}?>
 
 </body>
 </html>
