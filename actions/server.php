@@ -42,7 +42,7 @@ if (isset($_POST['signup'])) {
 		 // login users
 		    $row = mysqli_fetch_assoc($query);
 
-		    if(isset($_POST['accno'])){
+		    if($_POST['accno']!=0){
 		    	$acno=$_POST['accno'];
 		    	$uid=$row['uid'];
     			$accno=test_input($_POST['accno']);

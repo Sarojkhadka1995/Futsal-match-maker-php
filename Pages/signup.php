@@ -115,11 +115,11 @@ include '../actions/server.php';
 		<div class="form-group" style="display:none;" id="Accno">
 			<label class="control-label">Account number</label>
 			<div class="form-group">
-				<input class="form-control" type="number" name="accno" placeholder="Account number" required >
+				<input class="form-control" type="number" name="accno" placeholder="Account number">
 			</div>
 		</div>
 		<div style="text-align: center;" id="showBtn">
- 			<button  name="signup" class="btn btn-info" >Sign up</button>
+ 			<button type="submit" name="signup" class="btn btn-info" >Sign up</button>
  		</div>
  	</form>
 </div>

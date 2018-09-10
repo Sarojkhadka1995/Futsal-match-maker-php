@@ -10,7 +10,7 @@ $tid=$result1['tid'];
 if($tid==0){
 	header('Location:../pages/player_dashboard.php?noteam=1');
 }else{
-	$query=mysqli_query($con,"SELECT * from game where team1=$tid or team2=$tid");
+	$query=mysqli_query($con,"SELECT * from game where (team1=$tid or team2=$tid) and confirm=1");
 	//$result=mysqli_fetch_assoc($query);
 	if(mysqli_num_rows($query)==0){
 		header('Location:../pages/player_dashboard.php?nogame_err=1');	

@@ -157,6 +157,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 	//query to retrive start time and end time of selected futsal
 	$time_query=mysqli_query($con,"SELECT * from futsal where fid=$fid");
 	$time_result=mysqli_fetch_assoc($time_query);
+	$fname=$time_result['fname'];
 	$open_time=$time_result['opening_time'];
 	$close_time=$time_result['closing_time']; 
 	//query to retrive booking table id of selected futsal
@@ -167,6 +168,7 @@ $query=mysqli_query($con,"SELECT * from futsal");
 	//$detail_query=mysqli_query($con,"SELECT * from booking_details where bid=$bid"); 
 	?>
 	<!-- Creating a table with two heading -->
+	<h3 style="text-align: center"><?php echo $fname ;?></h3>
 	<table class="table table-hover table-bordered tableborder" >
 	<thead>
 	<tr>

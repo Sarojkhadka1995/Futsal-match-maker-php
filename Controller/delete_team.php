@@ -21,6 +21,8 @@ if(mysqli_num_rows($query_accgame)>0){
 	if($result['tid']>0){
 		//query to delete row from teams table
 		$del_query=mysqli_query($con,"DELETE from teams where owner_id=$id");
+		//deleting game associated with the team.
+		$del_game=mysqli_query($con,"DELETE from game where team1=$tid or team2=$tid");
 		if($del_query){
 			// //query to retrive tid of user
 			// $tid_query=mysqli_query($con,"SELECT tid from users where uid=$id");

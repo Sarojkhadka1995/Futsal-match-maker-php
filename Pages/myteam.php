@@ -145,7 +145,7 @@ if(mysqli_num_rows($query_cap)>0){
                 <?php
                   $query4=mysqli_query($con,"SELECT * FROM users where tid=0 and type='player'");
                   while($row4 = mysqli_fetch_assoc($query4)) { ?>
-                  <option value="<?php echo $row4['uid']; ?>"><?php echo $row4['name']; ?></option>
+                  <option value="<?php echo $row4['uid']; ?>"><?php echo $row4['email']; ?></option>
                 <?php } ?>
               </select>
             </div>

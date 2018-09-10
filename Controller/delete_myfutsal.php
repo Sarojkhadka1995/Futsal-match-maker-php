@@ -11,7 +11,7 @@ if($result['fid']>0){
 	$del_query=mysqli_query($con,"DELETE from futsal where fid=$fid");
 	$del_query1=mysqli_query($con,"DELETE from booking_table where fid=$fid");
 	if($del_query){
-		header("Location:../pages/futsal_dashboard.php?del_success=1");
+		header("Location:../pages/create_futsal_form.php?del_success=1");
 	}else{
 		header('Location:../pages/futsal_dashboard.php?del_err=1');
 	}

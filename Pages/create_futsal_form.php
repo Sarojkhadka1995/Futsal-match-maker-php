@@ -1,3 +1,11 @@
+<?php
+include "../connections/db.php";
+session_start();
+$id=$_SESSION['loggedUser'];
+$query=mysqli_query($con,"SELECT * from users where uid=$id");
+$result=mysqli_fetch_assoc($query);
+$contact=$result['contact'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +32,15 @@
 <!-- inserting header from javascrip function -->
 <div id="header"></div>
 <!--Remaining section-->
+<!--Alert showing delete success -->
+  <?php if(isset($_GET['del_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Futsal deleted successfully.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
 <div class="Container" style="max-width:600px;margin:60px auto;" >  
   <form type="form-inline" role="form" action="../actions/create_futsal.php" method="Post">
     <div class="form-group">
@@ -62,7 +79,7 @@
     <div class="form-group">
       <label class="control-label" for="contact">Contact</label>
       <div class="form-group">
-        <input class="form-control" type="number" name="contact" id="contact" onchange="validate_contact(this.value)" placeholder="+977-XXXXXXXXXX">
+        <input class="form-control" type="number" name="contact" id="contact" onchange="validate_contact(this.value)" value="<?php echo $contact ;?>">
         <span id= "err4" style="color:red;"></span>
       </div>
     </div>

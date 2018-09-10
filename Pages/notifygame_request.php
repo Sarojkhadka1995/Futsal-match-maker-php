@@ -13,6 +13,7 @@ $query1 = mysqli_query ($con,"SELECT * from game where team2='$tid' and notify=1
 //response notification
 $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'"); 
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,10 +49,41 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 	</script>
 </head>
 <body class="body">
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Navigation header -->
 <div id="header"></div>
 	<div class="container">
 		<div class="row">
+			<!-- alert showing accept failure -->
+		  <?php if(isset($_GET['accepted_game'])){ ?>
+		    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+		    <strong>You already have accepted game with this time and date.</strong>
+		    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		    </button>
+		    </div>
+		  <?php } ?>
+		  <!-- alert showing accept failure -->
+		  <?php if(isset($_GET['accepted_oppgame'])){ ?>
+		    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+		    <strong>Your opponent already have accepted game with this time and date.</strong>
+		    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		    </button>
+		    </div>
+		  <?php } ?>
+		  		  <!-- alert showing accepting failure -->
+		  <?php if(isset($_GET['accept_err'])){ ?>
+		    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+		    <strong>Couldnot accept game.</strong>
+		    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		    </button>
+		    </div>
+		  <?php } ?>
+
 			<!--Entries Column -->
   			<div class="col-md-9">
   				<div style="text-align: center">
@@ -66,7 +98,7 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 				          <th scole="col">Location</th>
 				          <th scope="col">Start time</th>
 				          <th scope="col">End time</th>
-				          <th scope="col">Action</th>
+				          <th scope="col"></th>
 				        </tr>
 				      </thead>
 				      <tbody>
@@ -80,110 +112,19 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 				          <td><?php echo $row['location']; ?></td>
 				          <td><?php echo $row['start_time'] ;?></td>
 				          <td><?php echo $row['end_time'] ;?></td>
-				          <td><a href="../actions/cancel_matchreq.php?id=<?php echo $row['gid']; ?>">Cancel</a> | <a href="../actions/accept_matchreq.php?id1=<?php echo $row['gid']; ?>">Accept</a></td>
+				          <td><?php 
+				          	//Query to retrive whether current user is team captain or not
+								$query_cap= mysqli_query($con,"SELECT * from teams where owner_id='$uid'");
+								if(mysqli_num_rows($query_cap)>0){ ?>
+								<a href="../actions/cancel_matchreq.php?id=<?php echo $row['gid']; ?>">Cancel</a> | <a href="../actions/accept_matchreq.php?id1=<?php echo $row['gid']; ?>">Accept</a><?php } ?></td>
 				        </tr>
 				        <?php } ?>
 				      </tbody>
 				    </table>
 				</div>
-				<!-- <div class="container">
-					<div align="center">
-						<h4>Game Response</h4>
-					</div>
-				    <table class="table table-hover">
-				    	<thead>
-				        <tr>
-				          <th scope="col">Opponent Name</th>
-				          <th scope="col">Futsal</th>
-				          <th scope="col">Location</th>
-				          <th scope="col">Start time</th>
-				          <th scope="col">End time</th>
-				          <th scope="col">Action</th>
-				        </tr>
-				      	</thead>
-				    	<tbody>
-							<?php while ($row2=mysqli_fetch_assoc($query2)) { ?>
-							<tr>
-								<td><?php $opp_tid=$row2['team2'];
-				          		$query4=mysqli_query($con,"SELECT team_name from teams where tid='$opp_tid'");
-				          		$result4=mysqli_fetch_assoc($query4);
-				          		echo $result4['team_name']; ?></td>
-				          		<td><?php echo $row2['venue'] ;?></td>
-						        <td><?php echo $row2['location']; ?></td>
-						        <td><?php echo $row2['start_time'] ;?></td>
-						        <td><?php echo $row2['end_time'] ;?></td>
-				          		<td><input type="button" class="btn btn-primary view" value="View" id="<?php echo $row2['gid']; ?>">|<a href="./pages/bookfutsal.php"><button type="button" class="btn btn-success" id="showBtn">Book</button></a>|<a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Delete</button></a></td>	
-				          	</tr>
-				          	<?php } ?>	    		
-				    	</tbody>
-				    </table>
-				</div> -->
 			</div>
-			<!-- <div id="sidebar" class="col-md-3"></div> -->
 		</div>
 	</div>
 
-
-<script>
-$(document).ready(function(){
-// 	//hiding book button
-// 	book_button();  
-// 	function book_button(){
-// 		$('#showBtn').hide();
-// 		// var value=val;
-// 		// if(value!=1){
-// 		// 	$('#showBtn').hide();
-// 		// }else{
-// 		// 	$('#showBtn').fadeIn('slow');
-// 		// }
-// 	}
-
-	//checking confirmation condition of game request i.e notifying request sender about his game response
-    $('.view').click(function(){ 
-    	var gid = $(this).attr("id");
-	    // alert(gid);
-	    // alert("Inside response_notification");
-	    $.ajax({
-			url:"../actions/fetch_response_notification.php",
-			method:"post",
-			data:{
-			gid:gid},
-			dataType:"json",
-			success:function(json){
-				console.log(json.value);
-				if(json.value == 0){
-					$.alert({
-			       	title: 'Response',
-			       	content: 'Pending',
-					})
-					//$('.Pending').html("Pending");
-					//document.getElementById('Pending').innerHTML="Pending";
-					//$('#book').hide();
-				}else if(json.value == 2){
-					$.alert({
-			       	title: 'Response',
-			       	content: 'Rejected',
-					})
-					//document.getElementById('Pending').innerHTML="Rejected";
-					//$('#Pending').html(json.notification);
-					//$('#book').fadeIn('slow');
-				}else{
-					$.alert({
-			       	title: 'Response',
-			       	content: 'Accepted',
-					})
-					//document.getElementById('Pending').innerHTML="Accepted";
-					//$('#showBtn').fadeIn('slow');
-				}
-			},error: function(){
-				$.alert({
-			       title: 'APi call error',
-			       content: 'Unsuccessful!',
-				})
-			}
-		});
-	});
-});
-</script>
 </body>
 </html>

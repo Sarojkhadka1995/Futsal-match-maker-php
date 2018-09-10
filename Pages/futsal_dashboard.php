@@ -68,15 +68,7 @@ $fid=$result['fid'];
     </button>
     </div>
   <?php } ?>
-<!--Alert showing delete success -->
-  <?php if(isset($_GET['del_success'])){ ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Futsal deleted successfully.</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-  <?php } ?>
+
   <!--Alert showing futsal create success -->
   <?php if(isset($_GET['create_success'])){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">

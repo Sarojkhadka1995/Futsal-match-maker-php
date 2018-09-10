@@ -5,16 +5,20 @@ use PHPMailer\PHPMailer\PHPMailer;
 
    $mail = new PHPMailer();
 
-   $team1=$_GET['tid1'];
-   $team2=$_GET['tid2'];
-   echo($team2."<br>");
-   $s_time=$_GET['st'];
-   echo $s_time."<br>";
-   $e_time=$_GET['et'];
-   $gdate=$_GET['gd'];
+   $gid=$_GET['gid'];   
+   echo $gid."<br>";
+   include "../connections/db.php";
+   //query to retrive teams from gid
+   $query_game=mysqli_query($con,"SELECT * from game where gid=$gid");
+   $result_game=mysqli_fetch_assoc($query_game);
+   $team1=$result_game['team1'];
+   $team2=$result_game['team2'];
+   $s_time=$result_game['start_time'];
+   $e_time=$result_game['end_time'];
+   $gdate=$result_game['gdate'];
+   $venue=$result_game['venue'];
+   $location=$result_game['location'];
    echo $gdate."<br>";
-   //die();
-   
    //query to retrive team1 users
    $team1_array=array();
    $team2_array=array();
@@ -25,31 +29,28 @@ use PHPMailer\PHPMailer\PHPMailer;
    }
    
 
-   // $query_team2=mysqli_query($con,"SELECT * from users where tid=$team2");
+   $query_team2=mysqli_query($con,"SELECT * from users where tid=$team2");
    while($row=mysqli_fetch_assoc($query_team2)){
       $var=$row['email'];
       array_push($team2_array, $var);
    }
    
-   // //print values of team1 mail id
-   // foreach ($team1_array as $email) {
-   //    echo($email."<br>");
-   // }
+   //print values of team1 mail id
+   foreach ($team1_array as $email) {
+      echo($email."<br>");
+   }
 
-   //    //print values of team1 mail id
-   // foreach ($team2_array as $email) {
-   //    echo($email."<br>");
-   // }
+      //print values of team1 mail id
+   foreach ($team2_array as $email) {
+      echo($email."<br>");
+   }
 
 
-   //$id1='khadkasaroj1995@gmail.com';
-   //$id2='fmm2071@gmail.com';
-   //$id3='prashamsapandey47@gmail.com';
    $mail->setFrom('fmm2071@gmail.com', 'Futsal Match Maker');
    $mail->addAddress('skhadka200ns@gmail.com', '');
    //$mail->addCC($id2, '');
-   $mail->Subject = 'Futsal match cancelled';
-   $mail->Body = 'Your match on '.$gdate.' starting from '.$s_time.' to '.$e_time.' is cancelled.' ;
+   $mail->Subject = 'Futsal match Accepted';
+   $mail->Body = 'You have a match on '.$gdate.' starting from '.$s_time.' to '.$e_time.'.'.'Venue: '.$venue.'  '.$location.' . ' ;
 
    /* SMTP parameters. */
    $mail->SMTPDebug = 1;                                 // Enable verbose debug output
@@ -71,7 +72,7 @@ use PHPMailer\PHPMailer\PHPMailer;
      )
    );
 
-   // $mailid=array($id1,$id3);
+  // $mailid=array($id1,$id3);
 
    foreach ($team1_array as $id ){
      $mail->addCC($id);
@@ -88,8 +89,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 
    /* Finally send the mail. */
    if($mail->send()){
-      header('Location:../pages/player_dashboard.php?gamecancel_success=1&gamecancelmsg_success=1');
+      header('Location:../pages/player_dashboard.php?gameacceptmsg_success=1');
    }else{
-      header('Location:../pages/player_dashboard.php?gamecancel_success=1&gamecancelmsg_failed=1');
+      header('Location:../pages/player_dashboard.php?gameacceptmsg_failed=1');
    }
 ?>

@@ -1,9 +1,13 @@
 <?php 
 include "../connections/db.php";
 session_start();
+$id=$_SESSION['loggedUser'];
+$query_id=mysqli_query($con,"SELECT tid from users where uid=$id");
+$result_id=mysqli_fetch_assoc($query_id);
+$tid=$result_id['tid'];
 if(isset($_POST["submit"])){
 	$s_venue=$_POST["s_venue"];
-	$query=mysqli_query($con,"SELECT * from teams where venue = '$s_venue' ");
+	$query=mysqli_query($con,"SELECT * from teams where venue = '$s_venue' and tid!=$tid");
 	if(mysqli_num_rows($query)>0){ ?>
 		<!DOCTYPE html>
 		<html>

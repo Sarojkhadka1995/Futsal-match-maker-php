@@ -6,12 +6,12 @@ $query=mysqli_query($con,"SELECT tid from users where uid= '$uid' ");
 $result=mysqli_fetch_assoc($query);
 $tid=$result['tid'];
 //response notification
-$query2 = mysqli_query($con,"SELECT * from game where team1='$tid' or team2='$tid' and confirm=1"); 
+$query2 = mysqli_query($con,"SELECT * from game where (team1='$tid' and confirm=1) or (team2='$tid' and confirm=1)"); 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>my game</title>
+<title>my games</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
@@ -102,7 +102,11 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid' or team2='$ti
 				        <td><?php echo $row2['start_time'] ;?></td>
 				        <td><?php echo $row2['end_time'] ;?></td>
 		          		<td><?php echo $row2['gdate']; ?></td>
-		          		<?php if($row2['team1']==$tid){ ?>
+		          		<?php 
+		          		$tid=$row2['team1'];
+		          		//Query to retrive whether current user is team captain or not
+						$query_cap= mysqli_query($con,"SELECT * from teams where owner_id='$uid' and tid=$tid");
+						if(mysqli_num_rows($query_cap)>0){ ?>
 		          		<td><a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Cancel</button></a></td>
 		          		<?php } ?>	
 		          	</tr>

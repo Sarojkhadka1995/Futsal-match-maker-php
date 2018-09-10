@@ -1,6 +1,10 @@
 <?php 
 include "../connections/db.php";
 session_start();
+$id=$_SESSION['loggedUser'];
+$query_id=mysqli_query($con,"SELECT tid from users where uid=$id");
+$result_id=mysqli_fetch_assoc($query_id);
+$tid=$result_id['tid'];
 if(isset($_POST["submit"])){
 	$start_time=$_POST["start_time"];
 	$end_time=$_POST["end_time"];
@@ -58,7 +62,9 @@ if(isset($_POST["submit"])){
 			          <td><?php echo $row['venue'] ;?></td>
 			          <td><?php echo $row['start_time']. "-" .$row['end_time'] ;?></td>
 			          <td><?php echo $row['contact'] ;?></td>
-			          <td><a href="../pages/viewteam.php?id=<?php echo $row['tid']; ?>">View</a> | <a href="submit_matchreq.php?id1=<?php echo $row['tid']; ?>">Play</a></td>
+			          <td><a href="../pages/viewteam.php?id=<?php echo $row['tid']; ?>">View</a> <?php
+			          if($row['tid']!=$tid){ ?>
+			           | <a href="submit_matchreq.php?id1=<?php echo $row['tid']; ?>">Play</a> <?php } ?></td>
 					</tr>
 			        <?php } ?>
 			      </tbody>

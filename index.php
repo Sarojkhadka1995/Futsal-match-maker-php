@@ -25,6 +25,7 @@
 </head>
 
 <body class="body">
+
 <!-- User not found-->
 <?php if(isset($_GET['err_login'])){?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -53,7 +54,7 @@
     <label class="control-label" for="name">Username</label>
       <div class="form-group">
         <!--  cadd this to code below to validate email onchange="validate_user(this.value)" -->
-        <input type="text" class="form-control" name="username"  placeholder="Username" required>
+        <input type="text" class="form-control" name="username" onchange="validate_user(this.value)" placeholder="Username" required>
         <span id="err1" style="color:red;"></span>        
       </div>
   </div>

@@ -48,6 +48,14 @@
    
   <!-- Calling header -->
   <div id="header"></div>
+  <?php if(isset($_GET['success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Game delete successful.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  <?php }?>
   <!-- alert showing  delete sucess -->
   <?php if(isset($_GET['bookdelsuccess'])){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -78,7 +86,7 @@
   <!-- alert showing team no present -->
   <?php if(isset($_GET['team_err'])){ ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Team doesnot exist.</strong>
+    <strong>Opponent team with this name doesnot exists.</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
@@ -235,7 +243,7 @@
 <!-- alert showing not available -->
 <?php if(isset($_GET['err_time'])){ ?>
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>No team are available at specified time.</strong>
+  <strong>No opponent teams are available at specified time.</strong>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true">&times;</span>
   </button>
@@ -261,6 +269,69 @@
     </button>
     </div>
   <?php } ?>
+
+  <!-- alert showing  game cancel failed  -->
+  <?php if(isset($_GET['gamecancel_failed'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Your game cancellation was failed.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+
+  <!-- alert showing game cancellation successful -->
+  <?php if(isset($_GET['gamecancel_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>You have successfully cancelled game.<br>All team members are sent a email of cancellation.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+
+  <!-- alert showing game accept mail successful -->
+  <?php if(isset($_GET['gameacceptmsg_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>All team members are sent a email about the game.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  
+  
+  <!-- alert showing game cancellation mail successful -->
+  <?php if(isset($_GET['gamecancelmsg_success'])){ ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>All team members are sent a email of cancellation.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  
+  <!-- alert showing  game cancel email failed  -->
+  <?php if(isset($_GET['gamecancelmsg_failed'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Your game cancel email sending failed.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+
+
+  <!-- alert showing  game accept email failed  -->
+  <?php if(isset($_GET['gameacceptmsg_failed'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Your game accept email sending failed.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+  
   <div class="row">
     <div class="col-md-8">            
       <!-- Search Widget -->

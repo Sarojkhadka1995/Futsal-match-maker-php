@@ -58,7 +58,8 @@ if(isset($_POST['bookfutsal'])){
 						}else{
 							header('Location:../pages/bookfutsal1.php?insert_err=1');
 						}
-						header('Location:../pages/bookfutsal1.php?book_success=1');
+						$url="../mail/booked.php?fid=$fid&s=$s_time&e=$e_time";
+						header("Location:".$url);
 					}
 				}
 			}

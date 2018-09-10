@@ -28,6 +28,15 @@ $query=mysqli_query($con,"SELECT * from futsal");
 <body class="body">
 
 <!-- Navigation -->
+<!-- alert showing not booked due to time range -->
+<?php if(isset($_GET['gap_err'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Booking unsuccessful. Please select time with one hour gap. Eg 6-7 , 4-5</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+<?php } ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navcolor">
 	<div class="container">
 		<a class="navbar-brand" href="#">Futsal Match Maker</a>

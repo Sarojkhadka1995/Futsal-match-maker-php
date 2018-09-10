@@ -45,20 +45,15 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 	</script>
 </head>
 <body class="body">
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Navigation header -->
 <div id="header"></div>
 <div class="container">
 	<div class="row">
 		<!--Entries Column -->
 			<div class="col-md-9">
-				<?php if(isset($_GET['success'])){ ?>
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-					    <strong>Game delete successful.</strong>
-					    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					    <span aria-hidden="true">&times;</span>
-					    </button>
-				    </div>
-				<?php }?>
 				<div style="text-align: center">
 					<h4>Game Response</h4>
 			</div>
@@ -84,7 +79,13 @@ $query2 = mysqli_query($con,"SELECT * from game where team1='$tid'");
 				        <td><?php echo $row2['location']; ?></td>
 				        <td><?php echo $row2['start_time'] ;?></td>
 				        <td><?php echo $row2['end_time'] ;?></td>
-		          		<td><input type="button" class="btn btn-primary view" value="View" id="<?php echo $row2['gid']; ?>">|<a href="../pages/bookfutsal1.php"><button type="button" class="btn btn-success">Book</button></a>|<a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Delete</button></a></td>	
+		          		<td><input type="button" class="btn btn-primary view" value="View" id="<?php echo $row2['gid']; ?>"></a>
+		          			<?php 
+				          	//Query to retrive whether current user is team captain or not
+								$query_cap= mysqli_query($con,"SELECT * from teams where owner_id='$uid'");
+								if(mysqli_num_rows($query_cap)>0){ ?>
+								|<a href="../actions/delete_match.php?id=<?php echo $row2['gid']; ?>"><button type="button" class="btn btn-danger">Delete</button></a><?php } ?>
+		          			</td>	
 		          	</tr>
 		          	<?php } ?>	    		
 		    	</tbody>

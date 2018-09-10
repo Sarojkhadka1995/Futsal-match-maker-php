@@ -15,6 +15,16 @@ if(isset($_POST["matchcreator"])){
 	$e_time=$_POST['e_time']; 
 	$date=$_POST['date'];
 
+	//To check whether time is in one hour gap or not
+	$array1=explode(":",$s_time);
+	$array2=explode(":",$e_time);
+	$start=$array1[0];
+	$end=$array2[0];
+	$end=$end+0;
+	$start=$start+1;
+	if($start!=$end){
+		header('Location:../pages/submit_matchreq.php?gap_err=1');
+	}	
 	//query to check whether a team has accepted game on given time and date
 	$query_check=mysqli_query($con,"SELECT * from game where team1=$tid1");
 	$already=0;
