@@ -21,9 +21,16 @@ if (isset($_POST['login'])){
             header('Location: ../pages/player_dashboard.php');
         }
         elseif ($row['type'] == 'futsal') {
+            $uid=$row['uid'];
             $_SESSION['loggedUser'] = $row['uid'];
             $_SESSION['loggedUser_name']=$row['name'];
-            header('Location: ../pages/futsal_dashboard.php');
+            //query to check whether a futsal owner has a futsal or not
+            $query_fut=mysqli_query($con,"SELECT * from futsal where uid=$uid");
+            if(mysqli_num_rows($query_fut)>0){
+                header('Location: ../pages/futsal_dashboard.php');
+            }else{
+                header('Location: ../pages/create_futsal_form.php');
+            }
         }
         else {
             $_SESSION['loggedUser'] = $row['uid'];

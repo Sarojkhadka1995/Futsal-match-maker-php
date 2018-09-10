@@ -1,17 +1,8 @@
 <?php
   require_once"../connections/db.php";
   include "header.php";
+  $query_futsal=mysqli_query($con,"SELECT * FROM futsal"); 
 
-  $query=mysqli_query($con,"SELECT * FROM users where type='futsal'");
-  $result=mysqli_fetch_assoc($query);
-  $uid=$result['uid'];
-
-  $query1=mysqli_query($con, "SELECT * FROM futsal where uid='$uid'");
-  
- $query2=mysqli_query($con,"SELECT * FROM users where type='futsal'");
-
-
- 
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +87,15 @@
 									</thead>
 
 									<tbody>
-										<?php while($row=mysqli_fetch_assoc($query2)) { ?>
+										<?php 
+										while($result_futsal=mysqli_fetch_assoc($query_futsal)){
+											$uid=$result_futsal['uid'];
+											$name=$result_futsal['fname'];
+											$location=$result_futsal['location'];
+
+											//query to retrive detail about futsal owner
+											$query_detail=mysqli_query($con,"SELECT * from users where uid=$uid");
+											while($row=mysqli_fetch_assoc($query_detail)) { ?>
 											<tr>
 												<td><?php echo $row['name']?></td>
 												<td><?php echo $row['email']?></td>
@@ -104,10 +103,8 @@
 
 												<?php }?>
 
-											<?php while($row=mysqli_fetch_assoc($query1)){ ?>
-
-												<td><?php echo $row['fname'];?></td>
-												<td><?php echo $row['location'];?></td>
+												<td><?php echo $name;?></td>
+												<td><?php echo $location;?></td>
                         						<td>
 
                         							<a

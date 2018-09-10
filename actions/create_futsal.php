@@ -17,7 +17,7 @@ $query="SELECT * FROM futsal WHERE fname='$fname' AND location='$venue' ";
 $check_query=mysqli_query($con,$query);
 $result=mysqli_fetch_assoc($check_query);
 if($result){
-	header('Location:../pages/futsal_dashboard.php?create_err=1');
+	header('Location:../pages/create_futsal_form.php?create_err=1');
 }
 else{
 	$query=mysqli_query($con,"INSERT INTO futsal(uid,fname,location,opening_time,closing_time,price,contact) VALUES ($id,'$fname','$venue','$open_time','$close_time','$price','$contact')");

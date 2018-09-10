@@ -78,15 +78,7 @@ $fid=$result['fid'];
     </button>
     </div>
   <?php } ?>
-  <!--Alert showing futsal create error-->
-  <?php if(isset($_GET['create_err'])){ ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Futsal with this name and location already present.<br>Please enter your actual futsal detail.</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-  <?php } ?>
+  
   <!--Alert showing futsal update success -->
   <?php if(isset($_GET['update_success'])){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -198,6 +190,7 @@ $fid=$result['fid'];
       $array2=explode(":",$close_time);
       $op_time=$array1[0];
       $cl_time=$array2[0];
+      
       //Converting string type to integer type 
       $op_time=$op_time+0;
       $cl_time=$cl_time+0;
@@ -205,7 +198,7 @@ $fid=$result['fid'];
       <tr>
         <th scope="row"><?php 
         $y=$x+1;
-        echo $x.":00 -".$y.":00"; ?></th>
+        echo $x.":00 - ".$y.":00"; ?></th>
         <?php 
         $s_time=$x;
         $e_time=$y;
@@ -311,7 +304,6 @@ $fid=$result['fid'];
   <form role="form" action="../actions/updatefutsalbooking.php" method="Post">
     <h4>UPDATE FUTSAL</h4>
     <div class="form-group">
-        <label class="control-label">Time</label>
         <div class="form-group">
           <div class="row">
             <div class="col">

@@ -10,29 +10,38 @@ $contact=$result['contact'];
 <html>
 <head>
   <title>Create team form</title>
-   <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
+<!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
 
-<!-- Custom styles for this template -->
-  <link href="../css/blog-home.css" rel="stylesheet">
 
+    <!-- Custom styles template -->
+    <link href="../css/blog-home.css" rel="stylesheet">
 
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-
-  <script> 
-    $(function(){
-      $("#header").load("../pages/fheader.php"); 
-      //$("#sidebar").load("sidebar.html"); 
-    });
-  </script> 
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+     <!-- JQuery confirm dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 <!-- custom css for body -->
 <body class="body">
-<!-- inserting header from javascrip function -->
-<div id="header"></div>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navcolor">
+  <div class="container">
+    <a class="navbar-brand" href="../pages/player_dashboard.php">Futsal Match Maker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
 <!--Remaining section-->
-<!--Alert showing delete success -->
+  <!--Alert showing delete success -->
   <?php if(isset($_GET['del_success'])){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Futsal deleted successfully.</strong>
@@ -41,7 +50,18 @@ $contact=$result['contact'];
     </button>
     </div>
   <?php } ?>
+  <!--Alert showing futsal create error-->
+  <?php if(isset($_GET['create_err'])){ ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Futsal with this name and location already present.<br>Please enter your actual futsal detail.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <?php } ?>
+
 <div class="Container" style="max-width:600px;margin:60px auto;" >  
+
   <form type="form-inline" role="form" action="../actions/create_futsal.php" method="Post">
     <div class="form-group">
       <label class="control-label" for="name">Futsal name</label>
